@@ -1,0 +1,213 @@
+syntax = "proto3";
+
+//option csharp_namespace = "SD_TP2";
+
+import "google/protobuf/timestamp.proto"; //importação para usar o timestamp
+import "google/protobuf/empty.proto";
+package file;
+
+//Serviço dedicado para o cliente UTILIZADOR 
+service EventService {
+	rpc getUserEventInfo (infoId) returns (eventUserInfo);
+	rpc getAdminEventInfo (infoId) returns (eventAdminInfo);
+	rpc getStatisticsInfo (infoId) returns (ocupationResponse);
+	rpc createEvent (createEventInfo) returns (eventStateMsg);
+	rpc updateEvent (updateEventInfo) returns (eventStateMsg);
+}
+
+
+
+message infoId {
+	int32 idEvento = 1;  
+}
+
+message eventStateMsg{
+	bool state=1;
+	int32 id=2;
+	string statusMsg=3;
+}
+
+message eventUserInfo {
+	bool state = 1;
+	string name=2;
+	string imgUrl=3;
+	string description=4;
+	string latitude=5;
+	string longitude=6;
+	int32 eventPlace=7;
+	int32 eventType=8;
+	google.protobuf.Timestamp statisticsDate=9;
+	float ocupationPercentage=10;
+	string statusMsg=11;
+	int32 eventId=12;
+	int32 ageRestriction=13;
+	google.protobuf.Timestamp startDate=14;
+	google.protobuf.Timestamp endDate=15;
+}
+message eventAdminInfo {
+	bool state = 1;
+	string name=2;
+	string imgUrl=3;
+	string description=4;
+	string latitude=5;
+	string longitude=6;
+	int32 eventPlace=7;
+	int32 eventType=8;
+	repeated user participants=9;
+	int32 nGuests=10;
+	int32 nParticipants=11;
+	google.protobuf.Timestamp statisticsDate=12;
+	float ocupationPercentage=13;
+	string statusMsg=14;
+	int32 eventId=15;
+	int32 ageRestriction=16;
+	google.protobuf.Timestamp startDate=17;
+	google.protobuf.Timestamp endDate=18;
+	
+}
+message createEventInfo {
+	
+	string name=1;
+	string imgUrl=2;
+	string description=3;
+	string latitude=4;
+	string longitude=5;
+	int32 eventPlace=6;
+	int32 eventType=7;
+	int32 ageRestriction=8;
+	google.protobuf.Timestamp startDate=9;
+	google.protobuf.Timestamp endDate=10;
+	int32 userId=11;
+}
+message updateEventInfo {
+	int32 id=1;
+	string name=2;
+	string imgUrl=3;
+	string description=4;
+	string latitude=5;
+	string longitude=6;
+	int32 eventPlace=7;
+	int32 eventType=8;
+	int32 ageRestriction=9;
+	google.protobuf.Timestamp startDate=10;
+	google.protobuf.Timestamp endDate=11;
+	int32 userId=12;
+}
+
+message user{
+	int32 id=1;
+	string username=2;
+	string name=3;
+	string imgUrl=4;
+}
+
+message ocupation{
+	google.protobuf.Timestamp statisticsDate=1;
+	float ocupationPercentage=2;
+	int32 nParticipants=3;
+	int32 nActiveParticipants=4;
+	int32 nInvites=5;
+}
+
+message ocupationResponse{
+	bool state=1;
+	repeated ocupation ocupationStats=2;
+	string statusMsg=3;
+}
+//----------------------------------------------------------------------------------------
+service UserService{
+//rpc login
+	rpc createUser (createUserInfo) returns(userStateMsg);
+	rpc updateUser (updateUserInfo) returns (userStateMsg);
+}
+message createUserInfo{
+	string username=1;
+	string name=2;
+	int32 age=3;
+	string imageUrl=4;
+	string organization=5;
+	string job=6;
+}
+message updateUserInfo{
+	string username=1;
+	string name=2;
+	int32 age=3;
+	string imageUrl=4;
+	string organization=5;
+	string job=6;
+	int32 id=7;
+}
+message userStateMsg{
+	bool state=1;
+	int32 id=2;
+	string statusMsg=3;
+}
+//-------------------------------------------------------------------------------------
+service AccessEventService{
+	rpc getEntryCode (entryParam) returns (entryInfo) ;
+	rpc getUserInviteLink(entryGuestParam) returns (entryInfo) ;
+	rpc getGlobalinviteLink( entryGlobalParam)returns(entryInfo);
+	rpc addUserToEvent(entryAddUser)returns(entryResponse);
+	rpc validateKeycode(entryInfoRequest)returns(entryValidation);
+	// rpc setEventDevice //isto talvez para mais tarde	
+}
+message entryInfoRequest{
+	string keyCode=1;
+	int32 userId=2;
+	int32 guestId=3;
+	int32 eventId=4;
+}
+message entryValidation{
+	bool status=1;
+	string statusMsg=2;
+	bool validating=3;
+}
+message entryAddUser{
+	int32 userId=1;
+	int32 eventId=2;
+	int32 guestId=3;
+	google.protobuf.Timestamp expireDate=4;
+
+}
+message entryResponse{
+	bool status=3;
+	string statusMsg=4;
+}
+message entryParam{
+	int32 userId=1;
+	int32 eventId=2;
+}
+message entryGuestParam{
+	int32 userId=1;
+	int32 eventId=2;
+	int32 guestId=3;
+}
+
+message entryGlobalParam{
+	int32 userId=1;
+	int32 eventId=2;
+}
+
+message entryInfo{
+	string keyCode=1;
+	google.protobuf.Timestamp expireDate=2;
+	bool status=3;
+	string statusMsg=4;
+}
+
+//-----------------------------------------------------------------------------------
+message fileUploadRequest {
+    oneof data {
+        string name = 1;
+        bytes chunk = 2;
+    };
+}
+
+message fileUploadResponse {
+    string id = 1;
+    string name = 2;
+}
+
+service FileUploaderService {
+    rpc uploadFile(stream fileUploadRequest) returns (fileUploadResponse) {}
+}
