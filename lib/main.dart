@@ -1,7 +1,11 @@
 import 'dart:developer';
+import 'package:eventapp/pages/createUserPage.dart';
+import 'package:eventapp/pages/eventsPage.dart';
+import 'package:eventapp/pages/homePage.dart';
+import 'package:eventapp/pages/loginPage.dart';
+import 'package:eventapp/pages/userSettingPage.dart';
 import 'package:eventapp/proto/gen/eventApp.pbgrpc.dart';
 import 'package:eventapp/proto/gen/google/protobuf/timestamp.pb.dart';
-import 'package:eventapp/services/eventService.dart';
 import 'package:flutter/material.dart';
 
 import 'common/grpc_commons.dart';
@@ -18,10 +22,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Hello',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Hello'),
+      theme:
+          ThemeData(primarySwatch: Colors.amber, accentColor: Colors.black54),
+      home: const Event(),
     );
   }
 }

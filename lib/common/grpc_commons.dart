@@ -7,8 +7,6 @@ class GrpcClientSingleton {
       ClientChannel("127.0.0.1", // Your IP here, localhost might not work.
           port: 8080,
           options: ChannelOptions(
-            //TODO: Change to secure with server certificates
-
             credentials: ChannelCredentials.insecure(),
             idleTimeout: Duration(minutes: 1),
           ));
