@@ -9,8 +9,7 @@ class Login extends StatelessWidget {
     final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login "),
-        elevation: 1,
+        elevation: 10,
       ),
       body: Center(
         child: Container(
@@ -22,7 +21,6 @@ class Login extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             // ignore: prefer_const_literals_to_create_immutables
             children: [
-              Image.asset('lib/assets/logo.png'),
               TextFormField(
                 initialValue: '',
                 // ignore: prefer_const_constructors
@@ -51,25 +49,46 @@ class Login extends StatelessWidget {
                 },
                 child: Text(
                   'Login',
-                  style: TextStyle(fontSize: deviceHeight * 0.05),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      ?.merge(TextStyle(fontSize: deviceHeight * 0.05)),
                 ),
               ),
-              TextButton(
-                onPressed: () {
-                  // Respond to button press
-                },
-                child: Text(
-                  "Recuperar password",
-                  style: TextStyle(fontSize: deviceHeight * 0.025),
-                ),
+              Column(
+                children: [
+                  Text(
+                    "Esqueceu-se da password?",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        ?.merge(TextStyle(fontSize: deviceHeight * 0.03)),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Respond to button press
+                    },
+                    child: Text(
+                      "Recuperar password",
+                      style: TextStyle(fontSize: deviceHeight * 0.025),
+                    ),
+                  ),
+                  Text(
+                    "Não tem conta?",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        ?.merge(TextStyle(fontSize: deviceHeight * 0.03)),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Respond to button press
+                    },
+                    child: Text("Registar",
+                        style: TextStyle(fontSize: deviceHeight * 0.025)),
+                  )
+                ],
               ),
-              TextButton(
-                onPressed: () {
-                  // Respond to button press
-                },
-                child: Text("Registar",
-                    style: TextStyle(fontSize: deviceHeight * 0.025)),
-              )
             ],
           ),
         ),

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:eventapp/components/themes.dart';
 import 'package:eventapp/pages/createUserPage.dart';
 import 'package:eventapp/pages/eventsPage.dart';
 import 'package:eventapp/pages/homePage.dart';
@@ -22,9 +23,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Hello',
-      theme:
-          ThemeData(primarySwatch: Colors.amber, accentColor: Colors.black54),
-      home: const Event(),
+      themeMode: ThemeMode.dark,
+      theme: ThemeClass.lightTheme,
+      darkTheme: ThemeClass.darkTheme,
+      home: const Login(),
     );
   }
 }
