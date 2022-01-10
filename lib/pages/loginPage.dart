@@ -33,6 +33,7 @@ class Login extends StatelessWidget {
               ),
               TextFormField(
                 initialValue: '',
+                obscureText: true,
                 // ignore: prefer_const_constructors
                 decoration: InputDecoration(
                   icon: Icon(Icons.password),

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:eventapp/components/themes.dart';
 import 'package:eventapp/pages/createUserPage.dart';
+import 'package:eventapp/pages/eventPage.dart';
 import 'package:eventapp/pages/eventsPage.dart';
 import 'package:eventapp/pages/homePage.dart';
 import 'package:eventapp/pages/loginPage.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: ThemeClass.lightTheme,
       darkTheme: ThemeClass.darkTheme,
-      home: const Login(),
+      home: const DefaultEvent(),
     );
   }
 }

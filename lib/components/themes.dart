@@ -11,7 +11,7 @@ class ThemeClass {
       ));
 
   static ThemeData darkTheme = ThemeData(
-      scaffoldBackgroundColor: Colors.grey.shade800,
+      scaffoldBackgroundColor: Colors.grey.shade900,
       textTheme: TextTheme(
         button: TextStyle(color: Colors.white),
         bodyText1: TextStyle(color: Colors.white),
