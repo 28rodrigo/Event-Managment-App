@@ -40,7 +40,6 @@ class MainHome extends StatelessWidget {
                       width: deviceWidth * 0.4,
                       child: Text('Olá Rodrigo !',
                           style: TextStyle(
-                              color: Colors.grey[800],
                               fontWeight: FontWeight.bold,
                               fontSize: deviceWidth * 0.1)),
                     ),
@@ -48,6 +47,7 @@ class MainHome extends StatelessWidget {
                       width: deviceWidth * 0.35,
                       height: deviceHeight * 0.2,
                       child: const CircleAvatar(
+                          backgroundColor: Colors.white,
                           radius: 10,
                           backgroundImage: NetworkImage(
                               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWP4oMxtQdoKdCzARMFIG6QjLI-FY7HH4RFA&usqp=CAU')),
@@ -63,7 +63,8 @@ class MainHome extends StatelessWidget {
                 },
                 child: Text(
                   'Criar Evento',
-                  style: TextStyle(fontSize: deviceHeight * 0.04),
+                  style: TextStyle(
+                      fontSize: deviceHeight * 0.04, color: Colors.white),
                 ),
               ),
               ElevatedButton(
@@ -75,7 +76,8 @@ class MainHome extends StatelessWidget {
                 child: Text(
                   'Ingressar em Evento',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: deviceHeight * 0.04),
+                  style: TextStyle(
+                      fontSize: deviceHeight * 0.04, color: Colors.white),
                 ),
               ),
               ElevatedButton(
@@ -87,12 +89,13 @@ class MainHome extends StatelessWidget {
                 child: Text(
                   'Meus Eventos',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: deviceHeight * 0.04),
+                  style: TextStyle(
+                      fontSize: deviceHeight * 0.04, color: Colors.white),
                 ),
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.amber[200],
+                  color: Colors.grey.shade800,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
                 width: deviceWidth * 1,
@@ -122,10 +125,13 @@ class MainHome extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("29 de Junho 2022, 23:30"),
+                          Text("29 de Junho 2022, 23:30",
+                              style: TextStyle(color: Colors.black)),
                           Text(
                             "Congresso Partido",
-                            style: TextStyle(fontSize: deviceWidth * 0.06),
+                            style: TextStyle(
+                                fontSize: deviceWidth * 0.06,
+                                color: Colors.black),
                           )
                         ],
                       ),
@@ -148,10 +154,15 @@ class MainHome extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("29 de Junho 2022, 23:30"),
+                          Text(
+                            "29 de Junho 2022, 23:30",
+                            style: TextStyle(color: Colors.black),
+                          ),
                           Text(
                             "Congresso Partido",
-                            style: TextStyle(fontSize: deviceWidth * 0.06),
+                            style: TextStyle(
+                                fontSize: deviceWidth * 0.06,
+                                color: Colors.black),
                           )
                         ],
                       ),

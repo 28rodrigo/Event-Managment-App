@@ -8,7 +8,8 @@ class DefaultEvent extends StatefulWidget {
 }
 
 class _DefaultEventState extends State<DefaultEvent> {
-  bool _expanded = false;
+  bool _expandedDescription = false;
+  bool _expandedStatisticInfo = false;
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -87,6 +88,7 @@ class _DefaultEventState extends State<DefaultEvent> {
                         ),
                         ExpansionPanelList(
                           animationDuration: Duration(milliseconds: 2000),
+                          expandedHeaderPadding: EdgeInsets.only(bottom: 20),
                           children: [
                             ExpansionPanel(
                                 headerBuilder: (context, isExpanded) {
@@ -98,94 +100,189 @@ class _DefaultEventState extends State<DefaultEvent> {
                                     ),
                                   );
                                 },
-                                body: ListTile(
-                                  title: Text(
-                                    'Congresso partidário do partido A para eleicao da assembleia geral.',
-                                    style: TextStyle(
-                                        fontSize: deviceHeight * 0.02),
-                                  ),
+                                body: Column(
+                                  children: [
+                                    ListTile(
+                                      title: Text(
+                                        'Congresso partidário do partido A para eleicao da assembleia geral.',
+                                        style: TextStyle(
+                                            fontSize: deviceHeight * 0.02),
+                                      ),
+                                    ),
+                                    ListTile(
+                                      title: Text(
+                                        'Duração',
+                                        style: TextStyle(
+                                            fontSize: deviceHeight * 0.03),
+                                      ),
+                                      subtitle: Text(
+                                        '12/01/2022 9:30h - 22/01/2022 19:00h',
+                                        style: TextStyle(
+                                            fontSize: deviceHeight * 0.02),
+                                      ),
+                                    ),
+                                    ListTile(
+                                      title: Text(
+                                        'Restrição de Idade:',
+                                        style: TextStyle(
+                                            fontSize: deviceHeight * 0.03),
+                                      ),
+                                      subtitle: Text(
+                                        '18 anos',
+                                        style: TextStyle(
+                                            fontSize: deviceHeight * 0.02),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                isExpanded: _expanded,
+                                isExpanded: _expandedDescription,
                                 canTapOnHeader: true),
                           ],
                           dividerColor: Colors.deepOrange,
                           expansionCallback: (panelIndex, isExpanded) {
-                            _expanded = !_expanded;
+                            _expandedDescription = !_expandedDescription;
+
                             setState(() {});
                           },
                         ),
-                        Container(
-                          width: deviceWidth * 0.65,
-                          height: deviceHeight * 0.1,
-                          margin: EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.0),
-                            color: Colors.green.shade900,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 2.0,
-                                spreadRadius: 0.0,
-                                offset: Offset(
-                                    2.0, 2.0), // shadow direction: bottom right
-                              )
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                'Publico',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    ?.merge(TextStyle(
-                                        fontSize: deviceHeight * 0.04)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(
+                              width: deviceWidth * 0.42,
+                              height: deviceHeight * 0.1,
+                              margin: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                color: Colors.green.shade900,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black,
+                                    blurRadius: 2.0,
+                                    spreadRadius: 0.0,
+                                    offset: Offset(2.0,
+                                        2.0), // shadow direction: bottom right
+                                  )
+                                ],
                               ),
-                              Icon(
-                                Icons.lock_open,
-                                color: Colors.white,
-                                size: deviceWidth * 0.08,
-                              )
-                            ],
-                          ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    'Público',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        ?.merge(TextStyle(
+                                            fontSize: deviceHeight * 0.038)),
+                                  ),
+                                  Icon(
+                                    Icons.lock_open,
+                                    color: Colors.white,
+                                    size: deviceWidth * 0.07,
+                                  )
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: deviceWidth * 0.42,
+                              height: deviceHeight * 0.1,
+                              margin: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                color: Colors.amber.shade900,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black,
+                                    blurRadius: 2.0,
+                                    spreadRadius: 0.0,
+                                    offset: Offset(2.0,
+                                        2.0), // shadow direction: bottom right
+                                  )
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Text(
+                                    'Presencial',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1
+                                        ?.merge(TextStyle(
+                                            fontSize: deviceHeight * 0.038)),
+                                  ),
+                                  Icon(
+                                    Icons.house_siding_outlined,
+                                    color: Colors.white,
+                                    size: deviceWidth * 0.07,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                        Container(
-                          width: deviceWidth * 0.65,
-                          height: deviceHeight * 0.1,
-                          margin: EdgeInsets.all(2),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.0),
-                            color: Colors.amber.shade900,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black,
-                                blurRadius: 2.0,
-                                spreadRadius: 0.0,
-                                offset: Offset(
-                                    2.0, 2.0), // shadow direction: bottom right
-                              )
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                'Presencial',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    ?.merge(TextStyle(
-                                        fontSize: deviceHeight * 0.04)),
-                              ),
-                              Icon(
-                                Icons.house_siding_outlined,
-                                color: Colors.white,
-                                size: deviceWidth * 0.08,
-                              ),
-                            ],
-                          ),
-                        )
+                        ExpansionPanelList(
+                          animationDuration: Duration(milliseconds: 2000),
+                          expandedHeaderPadding: EdgeInsets.only(bottom: 20),
+                          children: [
+                            ExpansionPanel(
+                                headerBuilder: (context, isExpanded) {
+                                  return ListTile(
+                                    title: Text(
+                                      'Estatísticas',
+                                      style: TextStyle(
+                                          fontSize: deviceHeight * 0.04),
+                                    ),
+                                  );
+                                },
+                                body: Column(
+                                  children: [
+                                    ListTile(
+                                      title: Text(
+                                        'Ocupação',
+                                        style: TextStyle(
+                                            fontSize: deviceHeight * 0.03),
+                                      ),
+                                    ),
+                                    ListTile(
+                                      title: Text(
+                                        'Duração',
+                                        style: TextStyle(
+                                            fontSize: deviceHeight * 0.03),
+                                      ),
+                                      subtitle: Text(
+                                        '12/01/2022 9:30h - 22/01/2022 19:00h',
+                                        style: TextStyle(
+                                            fontSize: deviceHeight * 0.02),
+                                      ),
+                                    ),
+                                    ListTile(
+                                      title: Text(
+                                        'Restrição de Idade:',
+                                        style: TextStyle(
+                                            fontSize: deviceHeight * 0.03),
+                                      ),
+                                      subtitle: Text(
+                                        '18 anos',
+                                        style: TextStyle(
+                                            fontSize: deviceHeight * 0.02),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                isExpanded: _expandedStatisticInfo,
+                                canTapOnHeader: true),
+                          ],
+                          dividerColor: Colors.deepOrange,
+                          expansionCallback: (panelIndex, isExpanded) {
+                            _expandedStatisticInfo = !_expandedStatisticInfo;
+
+                            setState(() {});
+                          },
+                        ),
                       ],
                     ),
                   ),

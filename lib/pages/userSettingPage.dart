@@ -41,9 +41,9 @@ class UserSettings extends StatelessWidget {
                       child: Text('Rodrigo Pereira',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              color: Colors.grey[800],
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
-                              fontSize: deviceWidth * 0.1)),
+                              fontSize: deviceWidth * 0.15)),
                     ),
                     Container(
                       width: deviceWidth * 0.35,
@@ -58,7 +58,7 @@ class UserSettings extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.black12,
+                    primary: Colors.grey.shade800,
                     maximumSize: Size(deviceWidth * 0.8, deviceHeight * 0.2),
                     minimumSize: Size(deviceWidth * 0.55, deviceHeight * 0.1)),
                 onPressed: () {
@@ -68,6 +68,7 @@ class UserSettings extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.account_box,
+                      color: Colors.white,
                       size: deviceWidth * 0.1,
                     ),
                     Expanded(
@@ -75,7 +76,8 @@ class UserSettings extends StatelessWidget {
                         'Alterar dados da conta',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.fade,
-                        style: TextStyle(fontSize: deviceHeight * 0.04),
+                        style: TextStyle(
+                            fontSize: deviceHeight * 0.04, color: Colors.white),
                       ),
                     ),
                   ],
@@ -83,7 +85,7 @@ class UserSettings extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.black12,
+                    primary: Colors.grey.shade800,
                     maximumSize: Size(deviceWidth * 0.8, deviceHeight * 0.2),
                     minimumSize: Size(deviceWidth * 0.55, deviceHeight * 0.1)),
                 onPressed: () {
@@ -93,6 +95,7 @@ class UserSettings extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.delete,
+                      color: Colors.white,
                       size: deviceWidth * 0.1,
                     ),
                     Expanded(
@@ -100,7 +103,8 @@ class UserSettings extends StatelessWidget {
                         'Eliminar conta',
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.fade,
-                        style: TextStyle(fontSize: deviceHeight * 0.04),
+                        style: TextStyle(
+                            fontSize: deviceHeight * 0.04, color: Colors.white),
                       ),
                     ),
                   ],

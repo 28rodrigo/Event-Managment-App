@@ -60,7 +60,7 @@ class _GeneralEventState extends State<GeneralEvent> {
                       height: MediaQuery.of(context).size.height * 0.32,
                       width: MediaQuery.of(context).size.width,
                       child: Card(
-                        color: Colors.grey.shade200,
+                        color: Colors.grey.shade800,
                         shadowColor: Colors.transparent,
                         elevation: 10,
                         shape: Border.all(
@@ -102,7 +102,7 @@ class _GeneralEventState extends State<GeneralEvent> {
                       height: MediaQuery.of(context).size.height * 0.32,
                       width: MediaQuery.of(context).size.width,
                       child: Card(
-                        color: Colors.amber.shade50,
+                        color: Colors.grey.shade800,
                         shadowColor: Colors.transparent,
                         elevation: 10,
                         shape: Border.all(

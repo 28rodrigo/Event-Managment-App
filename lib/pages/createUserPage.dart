@@ -15,7 +15,6 @@ class CreateUser extends StatelessWidget {
             fit: BoxFit.fill,
           ),
         ],
-        title: Text("Task Event"),
         elevation: 1,
       ),
       body: SingleChildScrollView(
@@ -31,7 +30,6 @@ class CreateUser extends StatelessWidget {
               children: [
                 Text('Novo Registo',
                     style: TextStyle(
-                        color: Colors.grey[800],
                         fontWeight: FontWeight.bold,
                         fontSize: deviceWidth * 0.15)),
                 Container(
@@ -132,7 +130,8 @@ class CreateUser extends StatelessWidget {
                   },
                   child: Text(
                     'Registar',
-                    style: TextStyle(fontSize: deviceHeight * 0.05),
+                    style: TextStyle(
+                        fontSize: deviceHeight * 0.05, color: Colors.white),
                   ),
                 ),
                 Row(
