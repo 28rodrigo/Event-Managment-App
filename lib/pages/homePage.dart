@@ -1,7 +1,39 @@
+import 'package:eventapp/pages/createEventPage.dart';
+import 'package:eventapp/pages/eventPage.dart';
+import 'package:eventapp/pages/eventsPage.dart';
+import 'package:eventapp/pages/userSettingPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-class MainHome extends StatelessWidget {
+class MainHome extends StatefulWidget {
   const MainHome({Key? key}) : super(key: key);
+
+  @override
+  State<MainHome> createState() => _MainHomeState();
+}
+
+class _MainHomeState extends State<MainHome> {
+  String _scanBarcode = 'Unknown';
+  Future<void> scanQR() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancel', true, ScanMode.QR);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+
+    setState(() {
+      _scanBarcode = barcodeScanRes;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -9,16 +41,20 @@ class MainHome extends StatelessWidget {
     final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        actions: [IconButton(onPressed: () => {}, icon: Icon(Icons.settings))],
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'lib/assets/logo.png',
-              fit: BoxFit.contain,
-              height: deviceHeight * 0.08,
-            ),
-          ],
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+              onPressed: () => {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => UserSettings()))
+                  },
+              icon: Icon(Icons.settings))
+        ],
+        centerTitle: true,
+        title: Image.asset(
+          'lib/assets/logo.png',
+          fit: BoxFit.contain,
+          height: deviceHeight * 0.08,
         ),
         elevation: 1,
       ),
@@ -59,7 +95,8 @@ class MainHome extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     fixedSize: Size(deviceWidth * 0.65, deviceHeight * 0.1)),
                 onPressed: () {
-                  // Respond to button press
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => CreateEvent()));
                 },
                 child: Text(
                   'Criar Evento',
@@ -71,7 +108,9 @@ class MainHome extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     fixedSize: Size(deviceWidth * 0.65, deviceHeight * 0.1)),
                 onPressed: () {
-                  // Respond to button press
+                  scanQR();
+                  //Navigator.push(context,
+                  //  MaterialPageRoute(builder: (context) => UserSettings()));
                 },
                 child: Text(
                   'Ingressar em Evento',
@@ -84,7 +123,8 @@ class MainHome extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     fixedSize: Size(deviceWidth * 0.65, deviceHeight * 0.1)),
                 onPressed: () {
-                  // Respond to button press
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Event()));
                 },
                 child: Text(
                   'Meus Eventos',
@@ -93,81 +133,144 @@ class MainHome extends StatelessWidget {
                       fontSize: deviceHeight * 0.04, color: Colors.white),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade800,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-                width: deviceWidth * 1,
-                height: deviceHeight * 0.3,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      "Próximos Eventos",
-                      style: TextStyle(fontSize: deviceWidth * 0.05),
-                    ),
-                    Container(
-                      width: deviceWidth * 0.7,
-                      height: deviceHeight * 0.1,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(0.0, 1.0), //(x,y)
-                            blurRadius: 6.0,
-                          ),
-                        ],
-                      ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => DefaultEvent()));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade800,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  width: deviceWidth * 1,
+                  height: deviceHeight * 0.3,
+                  child: Scrollbar(
+                    child: SingleChildScrollView(
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text("29 de Junho 2022, 23:30",
-                              style: TextStyle(color: Colors.black)),
                           Text(
-                            "Congresso Partido",
-                            style: TextStyle(
-                                fontSize: deviceWidth * 0.06,
-                                color: Colors.black),
+                            "Próximos Eventos",
+                            style: TextStyle(fontSize: deviceWidth * 0.05),
+                          ),
+                          Container(
+                            width: deviceWidth * 0.7,
+                            height: deviceHeight * 0.1,
+                            margin: EdgeInsets.only(top: 10, bottom: 20),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey, width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey,
+                                  offset: Offset(0.0, 1.0), //(x,y)
+                                  blurRadius: 6.0,
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("29 de Junho 2022, 23:30",
+                                    style: TextStyle(color: Colors.black)),
+                                Text(
+                                  "Congresso Partido",
+                                  style: TextStyle(
+                                      fontSize: deviceWidth * 0.06,
+                                      color: Colors.black),
+                                )
+                              ],
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DefaultEvent()));
+                            },
+                            child: Container(
+                              width: deviceWidth * 0.7,
+                              height: deviceHeight * 0.1,
+                              margin: EdgeInsets.only(top: 10, bottom: 20),
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.grey, width: 2),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    offset: Offset(0.0, 1.0), //(x,y)
+                                    blurRadius: 6.0,
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("29 de Junho 2022, 23:30",
+                                      style: TextStyle(color: Colors.black)),
+                                  Text(
+                                    "Congresso Partido",
+                                    style: TextStyle(
+                                        fontSize: deviceWidth * 0.06,
+                                        color: Colors.black),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DefaultEvent()));
+                            },
+                            child: Container(
+                              width: deviceWidth * 0.7,
+                              height: deviceHeight * 0.1,
+                              margin: EdgeInsets.only(top: 10, bottom: 20),
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: Colors.grey, width: 2),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey,
+                                    offset: Offset(0.0, 1.0), //(x,y)
+                                    blurRadius: 6.0,
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "29 de Junho 2022, 23:30",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  Text(
+                                    "Congresso Partido",
+                                    style: TextStyle(
+                                        fontSize: deviceWidth * 0.06,
+                                        color: Colors.black),
+                                  )
+                                ],
+                              ),
+                            ),
                           )
                         ],
                       ),
                     ),
-                    Container(
-                      width: deviceWidth * 0.7,
-                      height: deviceHeight * 0.1,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey, width: 2),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey,
-                            offset: Offset(0.0, 1.0), //(x,y)
-                            blurRadius: 6.0,
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "29 de Junho 2022, 23:30",
-                            style: TextStyle(color: Colors.black),
-                          ),
-                          Text(
-                            "Congresso Partido",
-                            style: TextStyle(
-                                fontSize: deviceWidth * 0.06,
-                                color: Colors.black),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                  ),
                 ),
               ),
             ],

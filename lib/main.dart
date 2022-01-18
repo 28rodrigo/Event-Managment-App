@@ -1,10 +1,12 @@
 import 'dart:developer';
 import 'package:eventapp/components/themes.dart';
+import 'package:eventapp/pages/createEventPage.dart';
 import 'package:eventapp/pages/createUserPage.dart';
 import 'package:eventapp/pages/eventPage.dart';
 import 'package:eventapp/pages/eventsPage.dart';
 import 'package:eventapp/pages/homePage.dart';
 import 'package:eventapp/pages/loginPage.dart';
+import 'package:eventapp/pages/scanPage.dart';
 import 'package:eventapp/pages/userSettingPage.dart';
 import 'package:eventapp/proto/gen/eventApp.pbgrpc.dart';
 import 'package:eventapp/proto/gen/google/protobuf/timestamp.pb.dart';
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: ThemeClass.lightTheme,
       darkTheme: ThemeClass.darkTheme,
-      home: const DefaultEvent(),
+      home: Login(),
     );
   }
 }

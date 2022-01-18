@@ -11,7 +11,7 @@ class Event extends StatefulWidget {
 }
 
 class _EventState extends State<Event> {
-  int _currentIndex = 0;
+  int _currentIndex = 1;
   final List _children = [
     ExploreEvent(Colors.transparent),
     GeneralEvent(),
@@ -29,16 +29,11 @@ class _EventState extends State<Event> {
     final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: () => {}, icon: Icon(Icons.arrow_back)),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'lib/assets/logo.png',
-              fit: BoxFit.contain,
-              height: deviceHeight * 0.08,
-            ),
-          ],
+        centerTitle: true,
+        title: Image.asset(
+          'lib/assets/logo.png',
+          fit: BoxFit.contain,
+          height: deviceHeight * 0.08,
         ),
       ),
       body: _children[_currentIndex],

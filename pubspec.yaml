@@ -38,6 +38,11 @@ dependencies:
   grpc: ^3.0.2
   protoc_plugin: ^20.0.0
   carousel_slider: ^4.0.0
+  qr_flutter: ^4.0.0
+  url_launcher: ^6.0.5
+  flutter_barcode_scanner: ^2.0.0
+  flutter_dropdown: ^1.0.0+hotfix.1
+  flutter_datetime_picker: ^1.5.1
 
 dev_dependencies:
   flutter_test:
