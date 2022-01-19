@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CreateEvent extends StatefulWidget {
   const CreateEvent({Key? key}) : super(key: key);
@@ -10,8 +13,18 @@ class CreateEvent extends StatefulWidget {
 }
 
 class _CreateEventState extends State<CreateEvent> {
+  XFile? _image;
   String startDate = "";
   String endDate = "";
+
+  _imgFromGallery() async {
+    XFile? image = await ImagePicker()
+        .pickImage(source: ImageSource.gallery, imageQuality: 50);
+    setState(() {
+      _image = image;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -149,6 +162,44 @@ class _CreateEventState extends State<CreateEvent> {
                     ),
                   ),
                 ),
+                CircleAvatar(
+                  radius: 55,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: _image != null
+                      ? ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: Image.file(
+                            File(_image!.path),
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.fitHeight,
+                          ),
+                        )
+                      : Container(
+                          decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(50)),
+                          width: 100,
+                          height: 100,
+                          child: Icon(
+                            Icons.camera_alt,
+                            color: Colors.grey[800],
+                          ),
+                        ),
+                ),
+                TextButton(
+                    onPressed: () {
+                      _imgFromGallery();
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          'Escolher imagem',
+                          style: TextStyle(fontSize: deviceWidth * 0.05),
+                        ),
+                      ],
+                    )),
                 TextButton(
                     onPressed: () {
                       DatePicker.showDateTimePicker(context,

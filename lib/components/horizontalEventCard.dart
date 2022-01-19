@@ -28,6 +28,7 @@ class HorizonalEventCard extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(10)),
               child: Container(
                 height: deviceHeight * 0.16,
+                width: deviceWidth * 0.6,
                 decoration: BoxDecoration(
                     border: Border.all(width: 2, color: Colors.black)),
                 child: FittedBox(

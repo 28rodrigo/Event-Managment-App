@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:eventapp/components/themes.dart';
+import 'package:eventapp/pages/adminEventPage.dart';
 import 'package:eventapp/pages/createEventPage.dart';
 import 'package:eventapp/pages/createUserPage.dart';
 import 'package:eventapp/pages/eventPage.dart';

@@ -9,12 +9,13 @@ class CreateUser extends StatelessWidget {
     final deviceHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Image.asset(
+            'lib/assets/logo.png',
+            fit: BoxFit.fill,
+          ),
+        ],
         elevation: 1,
-        centerTitle: true,
-        title: Text(
-          "Novo Utilizador",
-          style: TextStyle(fontSize: deviceHeight * 0.03),
-        ),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -27,6 +28,10 @@ class CreateUser extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
+                Text('Novo Registo',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: deviceWidth * 0.15)),
                 Container(
                   margin: EdgeInsets.only(
                       top: deviceHeight * 0.03, bottom: deviceHeight * 0.03),
