@@ -152,6 +152,10 @@ abstract class EventServiceBase extends $grpc.Service {
 }
 
 class UserServiceClient extends $grpc.Client {
+  static final _$login = $grpc.ClientMethod<$0.loginInfo, $0.authResponse>(
+      '/file.UserService/login',
+      ($0.loginInfo value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) => $0.authResponse.fromBuffer(value));
   static final _$createUser =
       $grpc.ClientMethod<$0.createUserInfo, $0.userStateMsg>(
           '/file.UserService/createUser',
@@ -168,6 +172,11 @@ class UserServiceClient extends $grpc.Client {
       $core.Iterable<$grpc.ClientInterceptor>? interceptors})
       : super(channel, options: options, interceptors: interceptors);
 
+  $grpc.ResponseFuture<$0.authResponse> login($0.loginInfo request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$login, request, options: options);
+  }
+
   $grpc.ResponseFuture<$0.userStateMsg> createUser($0.createUserInfo request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$createUser, request, options: options);
@@ -183,6 +192,13 @@ abstract class UserServiceBase extends $grpc.Service {
   $core.String get $name => 'file.UserService';
 
   UserServiceBase() {
+    $addMethod($grpc.ServiceMethod<$0.loginInfo, $0.authResponse>(
+        'login',
+        login_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.loginInfo.fromBuffer(value),
+        ($0.authResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.createUserInfo, $0.userStateMsg>(
         'createUser',
         createUser_Pre,
@@ -199,6 +215,11 @@ abstract class UserServiceBase extends $grpc.Service {
         ($0.userStateMsg value) => value.writeToBuffer()));
   }
 
+  $async.Future<$0.authResponse> login_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.loginInfo> request) async {
+    return login(call, await request);
+  }
+
   $async.Future<$0.userStateMsg> createUser_Pre(
       $grpc.ServiceCall call, $async.Future<$0.createUserInfo> request) async {
     return createUser(call, await request);
@@ -209,6 +230,8 @@ abstract class UserServiceBase extends $grpc.Service {
     return updateUser(call, await request);
   }
 
+  $async.Future<$0.authResponse> login(
+      $grpc.ServiceCall call, $0.loginInfo request);
   $async.Future<$0.userStateMsg> createUser(
       $grpc.ServiceCall call, $0.createUserInfo request);
   $async.Future<$0.userStateMsg> updateUser(

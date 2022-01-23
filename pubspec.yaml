@@ -47,6 +47,7 @@ dependencies:
   fl_chart: ^0.41.0
   draw_graph: ^1.0.0
   image_picker: ^0.8.4+4
+  shared_preferences: ^2.0.12
 
 dev_dependencies:
   flutter_test:

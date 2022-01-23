@@ -6,6 +6,7 @@ import 'package:eventapp/pages/createUserPage.dart';
 import 'package:eventapp/pages/eventPage.dart';
 import 'package:eventapp/pages/eventsPage.dart';
 import 'package:eventapp/pages/homePage.dart';
+import 'package:eventapp/pages/landingPage.dart';
 import 'package:eventapp/pages/loginPage.dart';
 import 'package:eventapp/pages/scanPage.dart';
 import 'package:eventapp/pages/userSettingPage.dart';
@@ -30,7 +31,11 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.dark,
       theme: ThemeClass.lightTheme,
       darkTheme: ThemeClass.darkTheme,
-      home: Login(),
+      routes: {
+        '/': (context) => Landing(),
+        '/login': (context) => Login(),
+        '/home': (context) => MainHome(),
+      },
     );
   }
 }
@@ -63,27 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Future<void> CreateEvent_() async {
-    var client = EventServiceClient(GrpcClientSingleton().client);
-    var res = await client.createEvent(createEventInfo(
-        ageRestriction: 18,
-        description: "ola",
-        endDate: Timestamp.fromDateTime(DateTime.now()),
-        startDate: Timestamp.fromDateTime(DateTime.now()),
-        eventPlace: 1,
-        eventType: 1,
-        imgUrl: "hello.com",
-        latitude: "1234",
-        longitude: "4321",
-        name: "evento flutter",
-        userId: 3));
-    log(res.statusMsg);
-
-    setState(() {
-      ress = res.statusMsg;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async => CreateEvent_(),
+        onPressed: () async {},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

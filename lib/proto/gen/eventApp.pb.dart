@@ -1326,14 +1326,152 @@ class ocupationResponse extends $pb.GeneratedMessage {
   void clearStatusMsg() => clearField(3);
 }
 
+class loginInfo extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'loginInfo', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'password')
+    ..hasRequiredFields = false
+  ;
+
+  loginInfo._() : super();
+  factory loginInfo({
+    $core.String? username,
+    $core.String? password,
+  }) {
+    final _result = create();
+    if (username != null) {
+      _result.username = username;
+    }
+    if (password != null) {
+      _result.password = password;
+    }
+    return _result;
+  }
+  factory loginInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory loginInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  loginInfo clone() => loginInfo()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  loginInfo copyWith(void Function(loginInfo) updates) => super.copyWith((message) => updates(message as loginInfo)) as loginInfo; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static loginInfo create() => loginInfo._();
+  loginInfo createEmptyInstance() => create();
+  static $pb.PbList<loginInfo> createRepeated() => $pb.PbList<loginInfo>();
+  @$core.pragma('dart2js:noInline')
+  static loginInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<loginInfo>(create);
+  static loginInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get username => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set username($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUsername() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUsername() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get password => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set password($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPassword() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPassword() => clearField(2);
+}
+
+class authResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'authResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
+    ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'state')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'statusMsg', protoName: 'statusMsg')
+    ..hasRequiredFields = false
+  ;
+
+  authResponse._() : super();
+  factory authResponse({
+    $core.bool? state,
+    $core.String? token,
+    $core.String? statusMsg,
+  }) {
+    final _result = create();
+    if (state != null) {
+      _result.state = state;
+    }
+    if (token != null) {
+      _result.token = token;
+    }
+    if (statusMsg != null) {
+      _result.statusMsg = statusMsg;
+    }
+    return _result;
+  }
+  factory authResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory authResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  authResponse clone() => authResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  authResponse copyWith(void Function(authResponse) updates) => super.copyWith((message) => updates(message as authResponse)) as authResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static authResponse create() => authResponse._();
+  authResponse createEmptyInstance() => create();
+  static $pb.PbList<authResponse> createRepeated() => $pb.PbList<authResponse>();
+  @$core.pragma('dart2js:noInline')
+  static authResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<authResponse>(create);
+  static authResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get state => $_getBF(0);
+  @$pb.TagNumber(1)
+  set state($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasState() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearState() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get token => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set token($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearToken() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get statusMsg => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set statusMsg($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasStatusMsg() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStatusMsg() => clearField(3);
+}
+
 class createUserInfo extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'createUserInfo', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'age', $pb.PbFieldType.O3)
-    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'imageUrl', protoName: 'imageUrl')
-    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'organization')
-    ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'job')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'email')
+    ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'age', $pb.PbFieldType.O3)
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'imageUrl', protoName: 'imageUrl')
+    ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'organization')
+    ..aOS(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'job')
+    ..aOS(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'password')
     ..hasRequiredFields = false
   ;
 
@@ -1341,10 +1479,12 @@ class createUserInfo extends $pb.GeneratedMessage {
   factory createUserInfo({
     $core.String? username,
     $core.String? name,
+    $core.String? email,
     $core.int? age,
     $core.String? imageUrl,
     $core.String? organization,
     $core.String? job,
+    $core.String? password,
   }) {
     final _result = create();
     if (username != null) {
@@ -1352,6 +1492,9 @@ class createUserInfo extends $pb.GeneratedMessage {
     }
     if (name != null) {
       _result.name = name;
+    }
+    if (email != null) {
+      _result.email = email;
     }
     if (age != null) {
       _result.age = age;
@@ -1364,6 +1507,9 @@ class createUserInfo extends $pb.GeneratedMessage {
     }
     if (job != null) {
       _result.job = job;
+    }
+    if (password != null) {
+      _result.password = password;
     }
     return _result;
   }
@@ -1407,40 +1553,58 @@ class createUserInfo extends $pb.GeneratedMessage {
   void clearName() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.int get age => $_getIZ(2);
+  $core.String get email => $_getSZ(2);
   @$pb.TagNumber(3)
-  set age($core.int v) { $_setSignedInt32(2, v); }
+  set email($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasAge() => $_has(2);
+  $core.bool hasEmail() => $_has(2);
   @$pb.TagNumber(3)
-  void clearAge() => clearField(3);
+  void clearEmail() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get imageUrl => $_getSZ(3);
+  $core.int get age => $_getIZ(3);
   @$pb.TagNumber(4)
-  set imageUrl($core.String v) { $_setString(3, v); }
+  set age($core.int v) { $_setSignedInt32(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasImageUrl() => $_has(3);
+  $core.bool hasAge() => $_has(3);
   @$pb.TagNumber(4)
-  void clearImageUrl() => clearField(4);
+  void clearAge() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get organization => $_getSZ(4);
+  $core.String get imageUrl => $_getSZ(4);
   @$pb.TagNumber(5)
-  set organization($core.String v) { $_setString(4, v); }
+  set imageUrl($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasOrganization() => $_has(4);
+  $core.bool hasImageUrl() => $_has(4);
   @$pb.TagNumber(5)
-  void clearOrganization() => clearField(5);
+  void clearImageUrl() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.String get job => $_getSZ(5);
+  $core.String get organization => $_getSZ(5);
   @$pb.TagNumber(6)
-  set job($core.String v) { $_setString(5, v); }
+  set organization($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasJob() => $_has(5);
+  $core.bool hasOrganization() => $_has(5);
   @$pb.TagNumber(6)
-  void clearJob() => clearField(6);
+  void clearOrganization() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $core.String get job => $_getSZ(6);
+  @$pb.TagNumber(7)
+  set job($core.String v) { $_setString(6, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasJob() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearJob() => clearField(7);
+
+  @$pb.TagNumber(8)
+  $core.String get password => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set password($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasPassword() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearPassword() => clearField(8);
 }
 
 class updateUserInfo extends $pb.GeneratedMessage {

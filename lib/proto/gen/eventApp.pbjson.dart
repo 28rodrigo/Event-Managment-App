@@ -161,21 +161,46 @@ const ocupationResponse$json = const {
 
 /// Descriptor for `ocupationResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List ocupationResponseDescriptor = $convert.base64Decode('ChFvY3VwYXRpb25SZXNwb25zZRIUCgVzdGF0ZRgBIAEoCFIFc3RhdGUSNwoOb2N1cGF0aW9uU3RhdHMYAiADKAsyDy5maWxlLm9jdXBhdGlvblIOb2N1cGF0aW9uU3RhdHMSHAoJc3RhdHVzTXNnGAMgASgJUglzdGF0dXNNc2c=');
+@$core.Deprecated('Use loginInfoDescriptor instead')
+const loginInfo$json = const {
+  '1': 'loginInfo',
+  '2': const [
+    const {'1': 'username', '3': 1, '4': 1, '5': 9, '10': 'username'},
+    const {'1': 'password', '3': 2, '4': 1, '5': 9, '10': 'password'},
+  ],
+};
+
+/// Descriptor for `loginInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List loginInfoDescriptor = $convert.base64Decode('Cglsb2dpbkluZm8SGgoIdXNlcm5hbWUYASABKAlSCHVzZXJuYW1lEhoKCHBhc3N3b3JkGAIgASgJUghwYXNzd29yZA==');
+@$core.Deprecated('Use authResponseDescriptor instead')
+const authResponse$json = const {
+  '1': 'authResponse',
+  '2': const [
+    const {'1': 'state', '3': 1, '4': 1, '5': 8, '10': 'state'},
+    const {'1': 'token', '3': 2, '4': 1, '5': 9, '10': 'token'},
+    const {'1': 'statusMsg', '3': 3, '4': 1, '5': 9, '10': 'statusMsg'},
+  ],
+};
+
+/// Descriptor for `authResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List authResponseDescriptor = $convert.base64Decode('CgxhdXRoUmVzcG9uc2USFAoFc3RhdGUYASABKAhSBXN0YXRlEhQKBXRva2VuGAIgASgJUgV0b2tlbhIcCglzdGF0dXNNc2cYAyABKAlSCXN0YXR1c01zZw==');
 @$core.Deprecated('Use createUserInfoDescriptor instead')
 const createUserInfo$json = const {
   '1': 'createUserInfo',
   '2': const [
     const {'1': 'username', '3': 1, '4': 1, '5': 9, '10': 'username'},
     const {'1': 'name', '3': 2, '4': 1, '5': 9, '10': 'name'},
-    const {'1': 'age', '3': 3, '4': 1, '5': 5, '10': 'age'},
-    const {'1': 'imageUrl', '3': 4, '4': 1, '5': 9, '10': 'imageUrl'},
-    const {'1': 'organization', '3': 5, '4': 1, '5': 9, '10': 'organization'},
-    const {'1': 'job', '3': 6, '4': 1, '5': 9, '10': 'job'},
+    const {'1': 'email', '3': 3, '4': 1, '5': 9, '10': 'email'},
+    const {'1': 'age', '3': 4, '4': 1, '5': 5, '10': 'age'},
+    const {'1': 'imageUrl', '3': 5, '4': 1, '5': 9, '10': 'imageUrl'},
+    const {'1': 'organization', '3': 6, '4': 1, '5': 9, '10': 'organization'},
+    const {'1': 'job', '3': 7, '4': 1, '5': 9, '10': 'job'},
+    const {'1': 'password', '3': 8, '4': 1, '5': 9, '10': 'password'},
   ],
 };
 
 /// Descriptor for `createUserInfo`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List createUserInfoDescriptor = $convert.base64Decode('Cg5jcmVhdGVVc2VySW5mbxIaCgh1c2VybmFtZRgBIAEoCVIIdXNlcm5hbWUSEgoEbmFtZRgCIAEoCVIEbmFtZRIQCgNhZ2UYAyABKAVSA2FnZRIaCghpbWFnZVVybBgEIAEoCVIIaW1hZ2VVcmwSIgoMb3JnYW5pemF0aW9uGAUgASgJUgxvcmdhbml6YXRpb24SEAoDam9iGAYgASgJUgNqb2I=');
+final $typed_data.Uint8List createUserInfoDescriptor = $convert.base64Decode('Cg5jcmVhdGVVc2VySW5mbxIaCgh1c2VybmFtZRgBIAEoCVIIdXNlcm5hbWUSEgoEbmFtZRgCIAEoCVIEbmFtZRIUCgVlbWFpbBgDIAEoCVIFZW1haWwSEAoDYWdlGAQgASgFUgNhZ2USGgoIaW1hZ2VVcmwYBSABKAlSCGltYWdlVXJsEiIKDG9yZ2FuaXphdGlvbhgGIAEoCVIMb3JnYW5pemF0aW9uEhAKA2pvYhgHIAEoCVIDam9iEhoKCHBhc3N3b3JkGAggASgJUghwYXNzd29yZA==');
 @$core.Deprecated('Use updateUserInfoDescriptor instead')
 const updateUserInfo$json = const {
   '1': 'updateUserInfo',

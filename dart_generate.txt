@@ -1,0 +1,3 @@
+ mv proto/gen2/* proto/gen
+
+ protoc -I proto/ proto/eventApp.proto --dart_out=grpc:/home/rodrigopereira/OneDrive/Redes/TP2/eventapp/lib/proto/gen2

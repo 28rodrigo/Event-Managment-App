@@ -4,7 +4,7 @@ import 'package:grpc/grpc.dart';
 
 class GrpcClientSingleton {
   ClientChannel client =
-      ClientChannel("127.0.0.1", // Your IP here, localhost might not work.
+      ClientChannel("192.168.1.107", // Your IP here, localhost might not work.
           port: 8080,
           options: ChannelOptions(
             credentials: ChannelCredentials.insecure(),
