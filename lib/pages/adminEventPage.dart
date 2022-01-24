@@ -70,15 +70,41 @@ class _AdminEventState extends State<AdminEvent> {
       var response = await AccessService().validateKeyCode(userInfo);
 
       if (response.status) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ScannerResult("Acesso garantido!")));
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: new Text("Resultado"),
+              content: new Text("Acesso Permitido!"),
+              actions: <Widget>[
+                new FlatButton(
+                  child: new Text("OK"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
       } else {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => ScannerResult("Acesso negado!")));
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: new Text("Alerta"),
+              content: new Text("Acesso Negado!"),
+              actions: <Widget>[
+                new FlatButton(
+                  child: new Text("OK"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
       }
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
@@ -378,7 +404,7 @@ class _AdminEventState extends State<AdminEvent> {
                         Container(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.blue.shade600,
+                              primary: Colors.green.shade600,
                               minimumSize:
                                   Size(deviceWidth * 0.7, deviceHeight * 0.08),
                               maximumSize:
@@ -399,7 +425,7 @@ class _AdminEventState extends State<AdminEvent> {
                                           fontSize: deviceHeight * 0.04)),
                                 ),
                                 Icon(
-                                  Icons.camera,
+                                  Icons.qr_code,
                                   color: Colors.white,
                                   size: deviceHeight * 0.05,
                                 )

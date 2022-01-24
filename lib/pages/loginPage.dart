@@ -131,25 +131,6 @@ class _LoginState extends State<Login> {
                 Column(
                   children: [
                     Text(
-                      "Esqueceu-se da password?",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          ?.merge(TextStyle(fontSize: deviceHeight * 0.03)),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => RecoverPassword()));
-                      },
-                      child: Text(
-                        "Recuperar password",
-                        style: TextStyle(fontSize: deviceHeight * 0.025),
-                      ),
-                    ),
-                    Text(
                       "Não tem conta?",
                       style: Theme.of(context)
                           .textTheme

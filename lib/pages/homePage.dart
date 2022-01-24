@@ -116,12 +116,21 @@ class _MainHomeState extends State<MainHome> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
-          IconButton(
-              onPressed: () => {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => UserSettings()))
-                  },
-              icon: Icon(Icons.settings))
+          ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UserSettings(_username)));
+              },
+              child: Container(
+                  width: deviceWidth * 0.1,
+                  height: deviceHeight * 0.05,
+                  child: const CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 10,
+                      backgroundImage: NetworkImage(
+                          "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png")))),
         ],
         centerTitle: true,
         title: Image.asset(
@@ -146,22 +155,16 @@ class _MainHomeState extends State<MainHome> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      width: deviceWidth * 0.4,
+                      width: deviceWidth * 0.7,
                       child: FittedBox(
                         fit: BoxFit.fitWidth,
                         child: Text('Olá \n' + _name + '!',
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: deviceWidth * 0.1)),
                       ),
                     ),
-                    Container(
-                        width: deviceWidth * 0.35,
-                        height: deviceHeight * 0.2,
-                        child: const CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 10,
-                            backgroundImage: AssetImage("lib/assets/bot.png")))
                   ],
                 ),
               ),

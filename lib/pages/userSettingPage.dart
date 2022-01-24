@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UserSettings extends StatelessWidget {
-  const UserSettings({Key? key}) : super(key: key);
+class UserSettings extends StatefulWidget {
+  String username;
+  UserSettings(this.username);
 
+  @override
+  State<UserSettings> createState() => _UserSettingsState();
+}
+
+class _UserSettingsState extends State<UserSettings> {
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -34,7 +40,7 @@ class UserSettings extends StatelessWidget {
                   children: [
                     Container(
                       width: deviceWidth,
-                      child: Text('Rodrigo Pereira',
+                      child: Text(widget.username,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               color: Colors.white,
@@ -47,35 +53,8 @@ class UserSettings extends StatelessWidget {
                       child: const CircleAvatar(
                           radius: 10,
                           backgroundImage: NetworkImage(
-                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWP4oMxtQdoKdCzARMFIG6QjLI-FY7HH4RFA&usqp=CAU')),
+                              "https://eitrawmaterials.eu/wp-content/uploads/2016/09/person-icon.png")),
                     )
-                  ],
-                ),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.grey.shade800,
-                    maximumSize: Size(deviceWidth * 0.8, deviceHeight * 0.2),
-                    minimumSize: Size(deviceWidth * 0.55, deviceHeight * 0.1)),
-                onPressed: () {
-                  // Respond to button press
-                },
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.account_box,
-                      color: Colors.white,
-                      size: deviceWidth * 0.1,
-                    ),
-                    Expanded(
-                      child: Text(
-                        'Alterar dados da conta',
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.fade,
-                        style: TextStyle(
-                            fontSize: deviceHeight * 0.04, color: Colors.white),
-                      ),
-                    ),
                   ],
                 ),
               ),
