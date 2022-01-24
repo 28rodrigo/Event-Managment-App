@@ -2,9 +2,12 @@ import 'package:eventapp/pages/createEventPage.dart';
 import 'package:eventapp/pages/eventPage.dart';
 import 'package:eventapp/pages/eventsPage.dart';
 import 'package:eventapp/pages/userSettingPage.dart';
+import 'package:eventapp/proto/gen/eventApp.pb.dart';
+import 'package:eventapp/services/eventService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainHome extends StatefulWidget {
   const MainHome({Key? key}) : super(key: key);
@@ -15,6 +18,59 @@ class MainHome extends StatefulWidget {
 
 class _MainHomeState extends State<MainHome> {
   String _scanBarcode = 'Unknown';
+  String _name = "";
+  String _imgUrl = "";
+  String _username = "";
+  String _token = "";
+  var _upcomingEvents = List<eventOverview>.empty(growable: true);
+  void _loadInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var name = prefs.getString("name");
+    var imgUrl = prefs.getString("imgUrl");
+    var username = prefs.getString("username");
+    var token = prefs.getString("token");
+    if (name != null) {
+      _name = name;
+    } else {
+      _name = "";
+    }
+    if (imgUrl != null) {
+      _imgUrl = imgUrl.split(" ")[0];
+    } else {
+      _imgUrl = "";
+    }
+    if (username != null) {
+      _username = username;
+    } else {
+      _username = "";
+    }
+    if (token != null) {
+      _token = token;
+    } else {
+      _token = "";
+    }
+    _loadUpcomingEvents();
+    print(_name);
+  }
+
+  void _loadUpcomingEvents() async {
+    var info = infoUserId();
+    info.username = _username;
+    info.token = _token;
+    var response = await EventService().getUpcomingEvents(info);
+    if (response.state) {
+      setState(() => _upcomingEvents = response.events);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _loadInfo();
+    });
+  }
+
   Future<void> scanQR() async {
     String barcodeScanRes;
     // Platform messages may fail, so we use a try/catch PlatformException.
@@ -52,7 +108,7 @@ class _MainHomeState extends State<MainHome> {
         ],
         centerTitle: true,
         title: Image.asset(
-          'lib/assets/logo.png',
+          "lib/assets/logo.png",
           fit: BoxFit.contain,
           height: deviceHeight * 0.08,
         ),
@@ -74,20 +130,21 @@ class _MainHomeState extends State<MainHome> {
                   children: [
                     Container(
                       width: deviceWidth * 0.4,
-                      child: Text('Olá Rodrigo !',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: deviceWidth * 0.1)),
+                      child: FittedBox(
+                        fit: BoxFit.fitWidth,
+                        child: Text('Olá \n' + _name + '!',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: deviceWidth * 0.1)),
+                      ),
                     ),
                     Container(
-                      width: deviceWidth * 0.35,
-                      height: deviceHeight * 0.2,
-                      child: const CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 10,
-                          backgroundImage: NetworkImage(
-                              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWP4oMxtQdoKdCzARMFIG6QjLI-FY7HH4RFA&usqp=CAU')),
-                    )
+                        width: deviceWidth * 0.35,
+                        height: deviceHeight * 0.2,
+                        child: const CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 10,
+                            backgroundImage: AssetImage("lib/assets/bot.png")))
                   ],
                 ),
               ),
@@ -133,142 +190,67 @@ class _MainHomeState extends State<MainHome> {
                       fontSize: deviceHeight * 0.04, color: Colors.white),
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => DefaultEvent()));
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade800,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  width: deviceWidth * 1,
-                  height: deviceHeight * 0.3,
-                  child: Scrollbar(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Text(
-                            "Próximos Eventos",
-                            style: TextStyle(fontSize: deviceWidth * 0.05),
-                          ),
-                          Container(
-                            width: deviceWidth * 0.7,
-                            height: deviceHeight * 0.1,
-                            margin: EdgeInsets.only(top: 10, bottom: 20),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey, width: 2),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey,
-                                  offset: Offset(0.0, 1.0), //(x,y)
-                                  blurRadius: 6.0,
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade800,
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                ),
+                width: deviceWidth * 1,
+                height: deviceHeight * 0.3,
+                child: Scrollbar(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          "Próximos Eventos",
+                          style: TextStyle(fontSize: deviceWidth * 0.05),
+                        ),
+                        Column(
+                          children: _upcomingEvents.map((e) {
+                            return InkWell(
+                              onTap: () {
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => DefaultEvent()));
+                              },
+                              child: Container(
+                                width: deviceWidth * 0.7,
+                                height: deviceHeight * 0.1,
+                                margin: EdgeInsets.only(top: 10, bottom: 20),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey,
+                                      offset: Offset(0.0, 1.0), //(x,y)
+                                      blurRadius: 6.0,
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("29 de Junho 2022, 23:30",
-                                    style: TextStyle(color: Colors.black)),
-                                Text(
-                                  "Congresso Partido",
-                                  style: TextStyle(
-                                      fontSize: deviceWidth * 0.06,
-                                      color: Colors.black),
-                                )
-                              ],
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DefaultEvent()));
-                            },
-                            child: Container(
-                              width: deviceWidth * 0.7,
-                              height: deviceHeight * 0.1,
-                              margin: EdgeInsets.only(top: 10, bottom: 20),
-                              decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.grey, width: 2),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey,
-                                    offset: Offset(0.0, 1.0), //(x,y)
-                                    blurRadius: 6.0,
-                                  ),
-                                ],
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(e.startDate.toDateTime().toString(),
+                                        style: TextStyle(color: Colors.black)),
+                                    Text(
+                                      e.name,
+                                      style: TextStyle(
+                                          fontSize: deviceWidth * 0.06,
+                                          color: Colors.black),
+                                    )
+                                  ],
+                                ),
                               ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("29 de Junho 2022, 23:30",
-                                      style: TextStyle(color: Colors.black)),
-                                  Text(
-                                    "Congresso Partido",
-                                    style: TextStyle(
-                                        fontSize: deviceWidth * 0.06,
-                                        color: Colors.black),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => DefaultEvent()));
-                            },
-                            child: Container(
-                              width: deviceWidth * 0.7,
-                              height: deviceHeight * 0.1,
-                              margin: EdgeInsets.only(top: 10, bottom: 20),
-                              decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.grey, width: 2),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey,
-                                    offset: Offset(0.0, 1.0), //(x,y)
-                                    blurRadius: 6.0,
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "29 de Junho 2022, 23:30",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  Text(
-                                    "Congresso Partido",
-                                    style: TextStyle(
-                                        fontSize: deviceWidth * 0.06,
-                                        color: Colors.black),
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
                     ),
                   ),
                 ),

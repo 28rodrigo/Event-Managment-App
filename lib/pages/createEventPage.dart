@@ -1,9 +1,13 @@
 import 'dart:io';
 
+import 'package:eventapp/proto/gen/eventApp.pb.dart';
+import 'package:eventapp/proto/gen/google/protobuf/timestamp.pb.dart';
+import 'package:eventapp/services/eventService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateEvent extends StatefulWidget {
   const CreateEvent({Key? key}) : super(key: key);
@@ -16,12 +20,47 @@ class _CreateEventState extends State<CreateEvent> {
   XFile? _image;
   String startDate = "";
   String endDate = "";
+  String _username = "";
+  String _token = "";
+  var nameController = TextEditingController();
+  var descriptionController = TextEditingController();
+  var latitudeController = TextEditingController();
+  var longitudeController = TextEditingController();
+  var ageController = TextEditingController();
+  int eventLocal = 1;
+  int eventType = 1;
+  void _loadInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var name = prefs.getString("name");
+    var imgUrl = prefs.getString("imgUrl");
+    var username = prefs.getString("username");
+    var token = prefs.getString("token");
+
+    if (username != null) {
+      _username = username;
+    } else {
+      _username = "";
+    }
+    if (token != null) {
+      _token = token;
+    } else {
+      _token = "";
+    }
+  }
 
   _imgFromGallery() async {
     XFile? image = await ImagePicker()
         .pickImage(source: ImageSource.gallery, imageQuality: 50);
     setState(() {
       _image = image;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _loadInfo();
     });
   }
 
@@ -56,7 +95,7 @@ class _CreateEventState extends State<CreateEvent> {
                   margin: EdgeInsets.only(
                       top: deviceHeight * 0.03, bottom: deviceHeight * 0.03),
                   child: TextFormField(
-                    initialValue: '',
+                    controller: nameController,
                     // ignore: prefer_const_constructors
                     decoration: InputDecoration(
                       icon: Icon(Icons.perm_device_information),
@@ -71,7 +110,7 @@ class _CreateEventState extends State<CreateEvent> {
                       top: deviceHeight * 0.03, bottom: deviceHeight * 0.03),
                   child: TextFormField(
                     maxLines: 10,
-                    initialValue: '',
+                    controller: descriptionController,
                     keyboardType: TextInputType.emailAddress,
                     // ignore: prefer_const_constructors
                     decoration: InputDecoration(
@@ -95,7 +134,7 @@ class _CreateEventState extends State<CreateEvent> {
                           top: deviceHeight * 0.03,
                           bottom: deviceHeight * 0.03),
                       child: TextFormField(
-                        initialValue: '',
+                        controller: latitudeController,
                         keyboardType: TextInputType.number,
                         // ignore: prefer_const_constructors
                         decoration: InputDecoration(
@@ -111,7 +150,7 @@ class _CreateEventState extends State<CreateEvent> {
                           top: deviceHeight * 0.03,
                           bottom: deviceHeight * 0.03),
                       child: TextFormField(
-                        initialValue: '',
+                        controller: longitudeController,
                         keyboardType: TextInputType.number,
                         // ignore: prefer_const_constructors
                         decoration: InputDecoration(
@@ -134,7 +173,17 @@ class _CreateEventState extends State<CreateEvent> {
                         Icons.expand_more,
                         color: Colors.blue,
                       ),
-                      onChanged: print,
+                      onChanged: (s) {
+                        var string = s.toString();
+                        if (string == "Publico")
+                          setState(() {
+                            eventType = 1;
+                          });
+                        else
+                          setState(() {
+                            eventType = 2;
+                          });
+                      },
                     ),
                     DropDown(
                       items: ["Local", "Online"],
@@ -143,7 +192,17 @@ class _CreateEventState extends State<CreateEvent> {
                         Icons.expand_more,
                         color: Colors.blue,
                       ),
-                      onChanged: print,
+                      onChanged: (s) {
+                        var string = s.toString();
+                        if (string == "Local")
+                          setState(() {
+                            eventLocal = 1;
+                          });
+                        else
+                          setState(() {
+                            eventLocal = 2;
+                          });
+                      },
                     ),
                   ],
                 ),
@@ -151,7 +210,7 @@ class _CreateEventState extends State<CreateEvent> {
                   margin: EdgeInsets.only(
                       top: deviceHeight * 0.03, bottom: deviceHeight * 0.03),
                   child: TextFormField(
-                    initialValue: '',
+                    controller: ageController,
                     keyboardType: TextInputType.number,
                     // ignore: prefer_const_constructors
                     decoration: InputDecoration(
@@ -265,8 +324,34 @@ class _CreateEventState extends State<CreateEvent> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       fixedSize: Size(deviceWidth * 0.6, deviceHeight * 0.08)),
-                  onPressed: () {
-                    // Respond to button press
+                  onPressed: () async {
+                    var request = new createEventInfo(
+                      ageRestriction: int.parse(ageController.text),
+                      description: descriptionController.text,
+                      endDate: Timestamp.fromDateTime(DateTime.parse(endDate)),
+                      startDate:
+                          Timestamp.fromDateTime(DateTime.parse(startDate)),
+                      eventPlace: eventLocal,
+                      eventType: eventType,
+                      imgUrl:
+                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzUdblYP0MWRgko8mx7a5a8fLM-7a8_F0O1Q&usqp=CAU",
+                      latitude: latitudeController.text,
+                      longitude: longitudeController.text,
+                      name: nameController.text,
+                    );
+                    request.username = _username;
+                    request.token = _token;
+
+                    var response = await EventService().createEvent(request);
+                    if (response.state) {
+                      final snackBar = SnackBar(
+                        content: Text('Evento criado com sucesso!'),
+                        duration: Duration(seconds: 5),
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/home', ModalRoute.withName('/home'));
+                    }
                   },
                   child: Text(
                     'Registar',

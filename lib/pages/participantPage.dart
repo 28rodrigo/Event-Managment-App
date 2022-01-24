@@ -1,9 +1,11 @@
 import 'package:eventapp/components/userCard.dart';
 import 'package:eventapp/pages/createUserPage.dart';
+import 'package:eventapp/proto/gen/eventApp.pb.dart';
 import 'package:flutter/material.dart';
 
 class Participants extends StatelessWidget {
-  const Participants({Key? key}) : super(key: key);
+  List<user> _users = List<user>.empty(growable: true);
+  Participants(this._users);
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +30,12 @@ class Participants extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                UserCard(),
-                UserCard(),
-                UserCard(),
-                UserCard(),
-                UserCard(),
-                UserCard(),
-                UserCard(),
-                UserCard()
-              ],
+              children: _users.map((e) {
+                return UserCard(
+                    e.username,
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWP4oMxtQdoKdCzARMFIG6QjLI-FY7HH4RFA&usqp=CAU',
+                    "Rodrigo Pereira");
+              }).toList(),
             ),
           ),
         ),

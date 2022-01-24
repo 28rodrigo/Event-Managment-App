@@ -1,7 +1,12 @@
+import 'package:eventapp/proto/gen/eventApp.pb.dart';
+import 'package:eventapp/services/accessService.dart';
 import 'package:flutter/material.dart';
+import 'package:maps_launcher/maps_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DefaultEvent extends StatefulWidget {
-  const DefaultEvent({Key? key}) : super(key: key);
+  eventUserInfo _info = eventUserInfo();
+  DefaultEvent(this._info);
 
   @override
   State<DefaultEvent> createState() => _DefaultEventState();
@@ -10,6 +15,33 @@ class DefaultEvent extends StatefulWidget {
 class _DefaultEventState extends State<DefaultEvent> {
   bool _expandedDescription = false;
   bool _expandedStatisticInfo = false;
+  String _username = "";
+  String _token = "";
+  void _loadInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var username = prefs.getString("username");
+    var token = prefs.getString("token");
+
+    if (username != null) {
+      _username = username;
+    } else {
+      _username = "";
+    }
+    if (token != null) {
+      _token = token;
+    } else {
+      _token = "";
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _loadInfo();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
@@ -35,7 +67,7 @@ class _DefaultEventState extends State<DefaultEvent> {
                 FittedBox(
                   fit: BoxFit.cover,
                   child: Text(
-                    "Congresso partidário",
+                    widget._info.name,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: deviceWidth * 0.4,
@@ -44,8 +76,7 @@ class _DefaultEventState extends State<DefaultEvent> {
                 ),
                 Container(
                   margin: EdgeInsets.all(deviceWidth * 0.04),
-                  child: Image.network(
-                      'https://imagens.ebc.com.br/DJ3772pOyeUSotv5t6nI6IyagzU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/img20210419125017730.jpg'),
+                  child: Image.network(widget._info.imgUrl),
                 ),
                 ConstrainedBox(
                   constraints: BoxConstraints(
@@ -59,31 +90,83 @@ class _DefaultEventState extends State<DefaultEvent> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.green.shade600,
-                              fixedSize: Size(
-                                  deviceWidth * 0.55, deviceHeight * 0.08)),
-                          onPressed: () {
-                            // Respond to button press
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                'Aceder',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    ?.merge(TextStyle(
-                                        fontSize: deviceHeight * 0.05)),
-                              ),
-                              Icon(
-                                Icons.lock_open,
-                                color: Colors.white,
-                                size: deviceHeight * 0.05,
-                              )
-                            ],
+                        Container(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: Colors.green.shade600,
+                                fixedSize: Size(
+                                    deviceWidth * 0.55, deviceHeight * 0.08)),
+                            onPressed: () async {
+                              publicRegisterInfo info = publicRegisterInfo();
+                              info.eventId = widget._info.eventId;
+                              info.token = _token;
+                              info.username = _username;
+
+                              var response = await AccessService()
+                                  .registerPublicEven(info);
+                              if (response.status) {
+                                final snackBar = SnackBar(
+                                  content: Text('Registado com sucesso!'),
+                                  duration: Duration(seconds: 5),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                                Navigator.pushNamedAndRemoveUntil(context,
+                                    '/home', ModalRoute.withName('/home'));
+                              }
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  'Registar',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      ?.merge(TextStyle(
+                                          fontSize: deviceHeight * 0.05)),
+                                ),
+                                Icon(
+                                  Icons.lock_open,
+                                  color: Colors.white,
+                                  size: deviceHeight * 0.05,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.blue.shade600,
+                              minimumSize:
+                                  Size(deviceWidth * 0.7, deviceHeight * 0.08),
+                              maximumSize:
+                                  Size(deviceWidth * 0.7, deviceHeight * 0.09),
+                            ),
+                            onPressed: () async {
+                              MapsLauncher.launchCoordinates(
+                                  double.parse(widget._info.latitude),
+                                  double.parse(widget._info.longitude));
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  'Navegação',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText1
+                                      ?.merge(TextStyle(
+                                          fontSize: deviceHeight * 0.04)),
+                                ),
+                                Icon(
+                                  Icons.map,
+                                  color: Colors.white,
+                                  size: deviceHeight * 0.05,
+                                )
+                              ],
+                            ),
                           ),
                         ),
                         ExpansionPanelList(
@@ -104,7 +187,7 @@ class _DefaultEventState extends State<DefaultEvent> {
                                   children: [
                                     ListTile(
                                       title: Text(
-                                        'Congresso partidário do partido A para eleicao da assembleia geral.',
+                                        widget._info.description,
                                         style: TextStyle(
                                             fontSize: deviceHeight * 0.02),
                                       ),
@@ -116,7 +199,15 @@ class _DefaultEventState extends State<DefaultEvent> {
                                             fontSize: deviceHeight * 0.03),
                                       ),
                                       subtitle: Text(
-                                        '12/01/2022 9:30h - 22/01/2022 19:00h',
+                                        widget._info.startDate
+                                                .toDateTime()
+                                                .toString()
+                                                .split('.')[0] +
+                                            ' - ' +
+                                            widget._info.endDate
+                                                .toDateTime()
+                                                .toString()
+                                                .split('.')[0],
                                         style: TextStyle(
                                             fontSize: deviceHeight * 0.02),
                                       ),
@@ -128,7 +219,8 @@ class _DefaultEventState extends State<DefaultEvent> {
                                             fontSize: deviceHeight * 0.03),
                                       ),
                                       subtitle: Text(
-                                        '18 anos',
+                                        widget._info.ageRestriction.toString() +
+                                            ' anos',
                                         style: TextStyle(
                                             fontSize: deviceHeight * 0.02),
                                       ),
@@ -148,80 +240,160 @@ class _DefaultEventState extends State<DefaultEvent> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Container(
-                              width: deviceWidth * 0.42,
-                              height: deviceHeight * 0.1,
-                              margin: EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                color: Colors.green.shade900,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 2.0,
-                                    spreadRadius: 0.0,
-                                    offset: Offset(2.0,
-                                        2.0), // shadow direction: bottom right
+                            widget._info.eventType == 1
+                                ? Container(
+                                    width: deviceWidth * 0.42,
+                                    height: deviceHeight * 0.1,
+                                    margin: EdgeInsets.all(2),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      color: Colors.green.shade900,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black,
+                                          blurRadius: 2.0,
+                                          spreadRadius: 0.0,
+                                          offset: Offset(2.0,
+                                              2.0), // shadow direction: bottom right
+                                        )
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          'Público',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              ?.merge(TextStyle(
+                                                  fontSize:
+                                                      deviceHeight * 0.038)),
+                                        ),
+                                        Icon(
+                                          Icons.lock_open,
+                                          color: Colors.white,
+                                          size: deviceWidth * 0.07,
+                                        )
+                                      ],
+                                    ),
                                   )
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'Público',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        ?.merge(TextStyle(
-                                            fontSize: deviceHeight * 0.038)),
+                                : Container(
+                                    width: deviceWidth * 0.42,
+                                    height: deviceHeight * 0.1,
+                                    margin: EdgeInsets.all(2),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      color: Colors.red.shade900,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black,
+                                          blurRadius: 2.0,
+                                          spreadRadius: 0.0,
+                                          offset: Offset(2.0,
+                                              2.0), // shadow direction: bottom right
+                                        )
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          'Privado',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              ?.merge(TextStyle(
+                                                  fontSize:
+                                                      deviceHeight * 0.038)),
+                                        ),
+                                        Icon(
+                                          Icons.lock_outline,
+                                          color: Colors.white,
+                                          size: deviceWidth * 0.07,
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                  Icon(
-                                    Icons.lock_open,
-                                    color: Colors.white,
-                                    size: deviceWidth * 0.07,
+                            widget._info.eventPlace == 1
+                                ? Container(
+                                    width: deviceWidth * 0.42,
+                                    height: deviceHeight * 0.1,
+                                    margin: EdgeInsets.all(2),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      color: Colors.amber.shade900,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black,
+                                          blurRadius: 2.0,
+                                          spreadRadius: 0.0,
+                                          offset: Offset(2.0,
+                                              2.0), // shadow direction: bottom right
+                                        )
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          'Presencial',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              ?.merge(TextStyle(
+                                                  fontSize:
+                                                      deviceHeight * 0.038)),
+                                        ),
+                                        Icon(
+                                          Icons.house_siding_outlined,
+                                          color: Colors.white,
+                                          size: deviceWidth * 0.07,
+                                        ),
+                                      ],
+                                    ),
                                   )
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: deviceWidth * 0.42,
-                              height: deviceHeight * 0.1,
-                              margin: EdgeInsets.all(2),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                color: Colors.amber.shade900,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black,
-                                    blurRadius: 2.0,
-                                    spreadRadius: 0.0,
-                                    offset: Offset(2.0,
-                                        2.0), // shadow direction: bottom right
+                                : Container(
+                                    width: deviceWidth * 0.42,
+                                    height: deviceHeight * 0.1,
+                                    margin: EdgeInsets.all(2),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      color: Colors.yellow.shade900,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black,
+                                          blurRadius: 2.0,
+                                          spreadRadius: 0.0,
+                                          offset: Offset(2.0,
+                                              2.0), // shadow direction: bottom right
+                                        )
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          'Online',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText1
+                                              ?.merge(TextStyle(
+                                                  fontSize:
+                                                      deviceHeight * 0.038)),
+                                        ),
+                                        Icon(
+                                          Icons.house_siding_outlined,
+                                          color: Colors.white,
+                                          size: deviceWidth * 0.07,
+                                        ),
+                                      ],
+                                    ),
                                   )
-                                ],
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'Presencial',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1
-                                        ?.merge(TextStyle(
-                                            fontSize: deviceHeight * 0.038)),
-                                  ),
-                                  Icon(
-                                    Icons.house_siding_outlined,
-                                    color: Colors.white,
-                                    size: deviceWidth * 0.07,
-                                  ),
-                                ],
-                              ),
-                            )
                           ],
                         ),
                         ExpansionPanelList(
@@ -246,27 +418,10 @@ class _DefaultEventState extends State<DefaultEvent> {
                                         style: TextStyle(
                                             fontSize: deviceHeight * 0.03),
                                       ),
-                                    ),
-                                    ListTile(
-                                      title: Text(
-                                        'Duração',
-                                        style: TextStyle(
-                                            fontSize: deviceHeight * 0.03),
-                                      ),
                                       subtitle: Text(
-                                        '12/01/2022 9:30h - 22/01/2022 19:00h',
-                                        style: TextStyle(
-                                            fontSize: deviceHeight * 0.02),
-                                      ),
-                                    ),
-                                    ListTile(
-                                      title: Text(
-                                        'Restrição de Idade:',
-                                        style: TextStyle(
-                                            fontSize: deviceHeight * 0.03),
-                                      ),
-                                      subtitle: Text(
-                                        '18 anos',
+                                        widget._info.ocupationPercentage
+                                                .toString() +
+                                            ' %',
                                         style: TextStyle(
                                             fontSize: deviceHeight * 0.02),
                                       ),

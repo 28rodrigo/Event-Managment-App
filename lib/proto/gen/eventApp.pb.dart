@@ -11,19 +11,85 @@ import 'package:protobuf/protobuf.dart' as $pb;
 
 import 'google/protobuf/timestamp.pb.dart' as $1;
 
+class infoUserId extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'infoUserId', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
+    ..hasRequiredFields = false
+  ;
+
+  infoUserId._() : super();
+  factory infoUserId({
+    $core.String? username,
+    $core.String? token,
+  }) {
+    final _result = create();
+    if (username != null) {
+      _result.username = username;
+    }
+    if (token != null) {
+      _result.token = token;
+    }
+    return _result;
+  }
+  factory infoUserId.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory infoUserId.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  infoUserId clone() => infoUserId()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  infoUserId copyWith(void Function(infoUserId) updates) => super.copyWith((message) => updates(message as infoUserId)) as infoUserId; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static infoUserId create() => infoUserId._();
+  infoUserId createEmptyInstance() => create();
+  static $pb.PbList<infoUserId> createRepeated() => $pb.PbList<infoUserId>();
+  @$core.pragma('dart2js:noInline')
+  static infoUserId getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<infoUserId>(create);
+  static infoUserId? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get username => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set username($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUsername() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUsername() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get token => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set token($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearToken() => clearField(2);
+}
+
 class infoId extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'infoId', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
     ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'idEvento', $pb.PbFieldType.O3, protoName: 'idEvento')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
     ..hasRequiredFields = false
   ;
 
   infoId._() : super();
   factory infoId({
     $core.int? idEvento,
+    $core.String? token,
   }) {
     final _result = create();
     if (idEvento != null) {
       _result.idEvento = idEvento;
+    }
+    if (token != null) {
+      _result.token = token;
     }
     return _result;
   }
@@ -56,6 +122,203 @@ class infoId extends $pb.GeneratedMessage {
   $core.bool hasIdEvento() => $_has(0);
   @$pb.TagNumber(1)
   void clearIdEvento() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get token => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set token($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearToken() => clearField(2);
+}
+
+class upcomingReturn extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'upcomingReturn', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
+    ..pc<eventOverview>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'events', $pb.PbFieldType.PM, subBuilder: eventOverview.create)
+    ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'state')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'statusMsg', protoName: 'statusMsg')
+    ..hasRequiredFields = false
+  ;
+
+  upcomingReturn._() : super();
+  factory upcomingReturn({
+    $core.Iterable<eventOverview>? events,
+    $core.bool? state,
+    $core.String? statusMsg,
+  }) {
+    final _result = create();
+    if (events != null) {
+      _result.events.addAll(events);
+    }
+    if (state != null) {
+      _result.state = state;
+    }
+    if (statusMsg != null) {
+      _result.statusMsg = statusMsg;
+    }
+    return _result;
+  }
+  factory upcomingReturn.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory upcomingReturn.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  upcomingReturn clone() => upcomingReturn()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  upcomingReturn copyWith(void Function(upcomingReturn) updates) => super.copyWith((message) => updates(message as upcomingReturn)) as upcomingReturn; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static upcomingReturn create() => upcomingReturn._();
+  upcomingReturn createEmptyInstance() => create();
+  static $pb.PbList<upcomingReturn> createRepeated() => $pb.PbList<upcomingReturn>();
+  @$core.pragma('dart2js:noInline')
+  static upcomingReturn getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<upcomingReturn>(create);
+  static upcomingReturn? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<eventOverview> get events => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.bool get state => $_getBF(1);
+  @$pb.TagNumber(2)
+  set state($core.bool v) { $_setBool(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasState() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearState() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get statusMsg => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set statusMsg($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasStatusMsg() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearStatusMsg() => clearField(3);
+}
+
+class eventOverview extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'eventOverview', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'imgUrl', protoName: 'imgUrl')
+    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'eventId', $pb.PbFieldType.O3, protoName: 'eventId')
+    ..aOM<$1.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'startDate', protoName: 'startDate', subBuilder: $1.Timestamp.create)
+    ..a<$core.int>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'eventPlace', $pb.PbFieldType.O3, protoName: 'eventPlace')
+    ..a<$core.int>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'eventType', $pb.PbFieldType.O3, protoName: 'eventType')
+    ..hasRequiredFields = false
+  ;
+
+  eventOverview._() : super();
+  factory eventOverview({
+    $core.String? name,
+    $core.String? imgUrl,
+    $core.int? eventId,
+    $1.Timestamp? startDate,
+    $core.int? eventPlace,
+    $core.int? eventType,
+  }) {
+    final _result = create();
+    if (name != null) {
+      _result.name = name;
+    }
+    if (imgUrl != null) {
+      _result.imgUrl = imgUrl;
+    }
+    if (eventId != null) {
+      _result.eventId = eventId;
+    }
+    if (startDate != null) {
+      _result.startDate = startDate;
+    }
+    if (eventPlace != null) {
+      _result.eventPlace = eventPlace;
+    }
+    if (eventType != null) {
+      _result.eventType = eventType;
+    }
+    return _result;
+  }
+  factory eventOverview.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory eventOverview.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  eventOverview clone() => eventOverview()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  eventOverview copyWith(void Function(eventOverview) updates) => super.copyWith((message) => updates(message as eventOverview)) as eventOverview; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static eventOverview create() => eventOverview._();
+  eventOverview createEmptyInstance() => create();
+  static $pb.PbList<eventOverview> createRepeated() => $pb.PbList<eventOverview>();
+  @$core.pragma('dart2js:noInline')
+  static eventOverview getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<eventOverview>(create);
+  static eventOverview? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get name => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set name($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasName() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearName() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get imgUrl => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set imgUrl($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasImgUrl() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearImgUrl() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get eventId => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set eventId($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasEventId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearEventId() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $1.Timestamp get startDate => $_getN(3);
+  @$pb.TagNumber(4)
+  set startDate($1.Timestamp v) { setField(4, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasStartDate() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearStartDate() => clearField(4);
+  @$pb.TagNumber(4)
+  $1.Timestamp ensureStartDate() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $core.int get eventPlace => $_getIZ(4);
+  @$pb.TagNumber(5)
+  set eventPlace($core.int v) { $_setSignedInt32(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasEventPlace() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearEventPlace() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.int get eventType => $_getIZ(5);
+  @$pb.TagNumber(6)
+  set eventType($core.int v) { $_setSignedInt32(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasEventType() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearEventType() => clearField(6);
 }
 
 class eventStateMsg extends $pb.GeneratedMessage {
@@ -679,7 +942,8 @@ class createEventInfo extends $pb.GeneratedMessage {
     ..a<$core.int>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ageRestriction', $pb.PbFieldType.O3, protoName: 'ageRestriction')
     ..aOM<$1.Timestamp>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'startDate', protoName: 'startDate', subBuilder: $1.Timestamp.create)
     ..aOM<$1.Timestamp>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'endDate', protoName: 'endDate', subBuilder: $1.Timestamp.create)
-    ..a<$core.int>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', $pb.PbFieldType.O3, protoName: 'userId')
+    ..aOS(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
+    ..aOS(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
     ..hasRequiredFields = false
   ;
 
@@ -695,7 +959,8 @@ class createEventInfo extends $pb.GeneratedMessage {
     $core.int? ageRestriction,
     $1.Timestamp? startDate,
     $1.Timestamp? endDate,
-    $core.int? userId,
+    $core.String? username,
+    $core.String? token,
   }) {
     final _result = create();
     if (name != null) {
@@ -728,8 +993,11 @@ class createEventInfo extends $pb.GeneratedMessage {
     if (endDate != null) {
       _result.endDate = endDate;
     }
-    if (userId != null) {
-      _result.userId = userId;
+    if (username != null) {
+      _result.username = username;
+    }
+    if (token != null) {
+      _result.token = token;
     }
     return _result;
   }
@@ -849,13 +1117,22 @@ class createEventInfo extends $pb.GeneratedMessage {
   $1.Timestamp ensureEndDate() => $_ensure(9);
 
   @$pb.TagNumber(11)
-  $core.int get userId => $_getIZ(10);
+  $core.String get username => $_getSZ(10);
   @$pb.TagNumber(11)
-  set userId($core.int v) { $_setSignedInt32(10, v); }
+  set username($core.String v) { $_setString(10, v); }
   @$pb.TagNumber(11)
-  $core.bool hasUserId() => $_has(10);
+  $core.bool hasUsername() => $_has(10);
   @$pb.TagNumber(11)
-  void clearUserId() => clearField(11);
+  void clearUsername() => clearField(11);
+
+  @$pb.TagNumber(12)
+  $core.String get token => $_getSZ(11);
+  @$pb.TagNumber(12)
+  set token($core.String v) { $_setString(11, v); }
+  @$pb.TagNumber(12)
+  $core.bool hasToken() => $_has(11);
+  @$pb.TagNumber(12)
+  void clearToken() => clearField(12);
 }
 
 class updateEventInfo extends $pb.GeneratedMessage {
@@ -871,7 +1148,8 @@ class updateEventInfo extends $pb.GeneratedMessage {
     ..a<$core.int>(9, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'ageRestriction', $pb.PbFieldType.O3, protoName: 'ageRestriction')
     ..aOM<$1.Timestamp>(10, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'startDate', protoName: 'startDate', subBuilder: $1.Timestamp.create)
     ..aOM<$1.Timestamp>(11, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'endDate', protoName: 'endDate', subBuilder: $1.Timestamp.create)
-    ..a<$core.int>(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', $pb.PbFieldType.O3, protoName: 'userId')
+    ..aOS(12, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
+    ..aOS(13, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
     ..hasRequiredFields = false
   ;
 
@@ -888,7 +1166,8 @@ class updateEventInfo extends $pb.GeneratedMessage {
     $core.int? ageRestriction,
     $1.Timestamp? startDate,
     $1.Timestamp? endDate,
-    $core.int? userId,
+    $core.String? username,
+    $core.String? token,
   }) {
     final _result = create();
     if (id != null) {
@@ -924,8 +1203,11 @@ class updateEventInfo extends $pb.GeneratedMessage {
     if (endDate != null) {
       _result.endDate = endDate;
     }
-    if (userId != null) {
-      _result.userId = userId;
+    if (username != null) {
+      _result.username = username;
+    }
+    if (token != null) {
+      _result.token = token;
     }
     return _result;
   }
@@ -1054,13 +1336,22 @@ class updateEventInfo extends $pb.GeneratedMessage {
   $1.Timestamp ensureEndDate() => $_ensure(10);
 
   @$pb.TagNumber(12)
-  $core.int get userId => $_getIZ(11);
+  $core.String get username => $_getSZ(11);
   @$pb.TagNumber(12)
-  set userId($core.int v) { $_setSignedInt32(11, v); }
+  set username($core.String v) { $_setString(11, v); }
   @$pb.TagNumber(12)
-  $core.bool hasUserId() => $_has(11);
+  $core.bool hasUsername() => $_has(11);
   @$pb.TagNumber(12)
-  void clearUserId() => clearField(12);
+  void clearUsername() => clearField(12);
+
+  @$pb.TagNumber(13)
+  $core.String get token => $_getSZ(12);
+  @$pb.TagNumber(13)
+  set token($core.String v) { $_setString(12, v); }
+  @$pb.TagNumber(13)
+  $core.bool hasToken() => $_has(12);
+  @$pb.TagNumber(13)
+  void clearToken() => clearField(13);
 }
 
 class user extends $pb.GeneratedMessage {
@@ -1392,6 +1683,8 @@ class authResponse extends $pb.GeneratedMessage {
     ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'state')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'statusMsg', protoName: 'statusMsg')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'name')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'imgurl')
     ..hasRequiredFields = false
   ;
 
@@ -1400,6 +1693,8 @@ class authResponse extends $pb.GeneratedMessage {
     $core.bool? state,
     $core.String? token,
     $core.String? statusMsg,
+    $core.String? name,
+    $core.String? imgurl,
   }) {
     final _result = create();
     if (state != null) {
@@ -1410,6 +1705,12 @@ class authResponse extends $pb.GeneratedMessage {
     }
     if (statusMsg != null) {
       _result.statusMsg = statusMsg;
+    }
+    if (name != null) {
+      _result.name = name;
+    }
+    if (imgurl != null) {
+      _result.imgurl = imgurl;
     }
     return _result;
   }
@@ -1460,6 +1761,24 @@ class authResponse extends $pb.GeneratedMessage {
   $core.bool hasStatusMsg() => $_has(2);
   @$pb.TagNumber(3)
   void clearStatusMsg() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get name => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set name($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasName() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearName() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get imgurl => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set imgurl($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasImgurl() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearImgurl() => clearField(5);
 }
 
 class createUserInfo extends $pb.GeneratedMessage {
@@ -1811,6 +2130,81 @@ class userStateMsg extends $pb.GeneratedMessage {
   $core.bool hasStatusMsg() => $_has(2);
   @$pb.TagNumber(3)
   void clearStatusMsg() => clearField(3);
+}
+
+class publicRegisterInfo extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'publicRegisterInfo', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'eventId', $pb.PbFieldType.O3, protoName: 'eventId')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
+    ..hasRequiredFields = false
+  ;
+
+  publicRegisterInfo._() : super();
+  factory publicRegisterInfo({
+    $core.String? username,
+    $core.int? eventId,
+    $core.String? token,
+  }) {
+    final _result = create();
+    if (username != null) {
+      _result.username = username;
+    }
+    if (eventId != null) {
+      _result.eventId = eventId;
+    }
+    if (token != null) {
+      _result.token = token;
+    }
+    return _result;
+  }
+  factory publicRegisterInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory publicRegisterInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  publicRegisterInfo clone() => publicRegisterInfo()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  publicRegisterInfo copyWith(void Function(publicRegisterInfo) updates) => super.copyWith((message) => updates(message as publicRegisterInfo)) as publicRegisterInfo; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static publicRegisterInfo create() => publicRegisterInfo._();
+  publicRegisterInfo createEmptyInstance() => create();
+  static $pb.PbList<publicRegisterInfo> createRepeated() => $pb.PbList<publicRegisterInfo>();
+  @$core.pragma('dart2js:noInline')
+  static publicRegisterInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<publicRegisterInfo>(create);
+  static publicRegisterInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get username => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set username($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUsername() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUsername() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get eventId => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set eventId($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasEventId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEventId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get token => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set token($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasToken() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearToken() => clearField(3);
 }
 
 class entryInfoRequest extends $pb.GeneratedMessage {

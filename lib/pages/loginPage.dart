@@ -40,7 +40,13 @@ class _LoginState extends State<Login> {
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("username", usernameController.text);
+      prefs.setString(
+        "username",
+        usernameController.text,
+      );
+      prefs.setString("name", usernameController.text);
+
+      prefs.setString("imgUrl", response.imgurl);
       prefs.setString("token", response.token);
       Navigator.pushNamedAndRemoveUntil(
           context, '/home', ModalRoute.withName('/home'));

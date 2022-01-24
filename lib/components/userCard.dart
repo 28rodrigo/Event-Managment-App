@@ -2,7 +2,10 @@ import 'package:eventapp/pages/eventPage.dart';
 import 'package:flutter/material.dart';
 
 class UserCard extends StatelessWidget {
-  const UserCard({Key? key}) : super(key: key);
+  String username = "";
+  String imgUrl = "";
+  String name = "";
+  UserCard(this.username, this.imgUrl, this.name);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class UserCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Image.network(
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWP4oMxtQdoKdCzARMFIG6QjLI-FY7HH4RFA&usqp=CAU',
+            imgUrl,
             width: deviceWidth * 0.15,
             fit: BoxFit.contain,
           ),
@@ -36,14 +39,14 @@ class UserCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Rodrigo Pereira",
+                name,
                 style: TextStyle(
                     fontSize: deviceWidth * 0.08,
                     color: Colors.black,
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                "@28rodrigo",
+                username,
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: deviceWidth * 0.04,

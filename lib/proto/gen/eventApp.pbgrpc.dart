@@ -40,6 +40,26 @@ class EventServiceClient extends $grpc.Client {
           '/file.EventService/updateEvent',
           ($0.updateEventInfo value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.eventStateMsg.fromBuffer(value));
+  static final _$getUpcomingEvents =
+      $grpc.ClientMethod<$0.infoUserId, $0.upcomingReturn>(
+          '/file.EventService/getUpcomingEvents',
+          ($0.infoUserId value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.upcomingReturn.fromBuffer(value));
+  static final _$getMyEvents =
+      $grpc.ClientMethod<$0.infoUserId, $0.upcomingReturn>(
+          '/file.EventService/getMyEvents',
+          ($0.infoUserId value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.upcomingReturn.fromBuffer(value));
+  static final _$getOtherEvents =
+      $grpc.ClientMethod<$0.infoUserId, $0.upcomingReturn>(
+          '/file.EventService/getOtherEvents',
+          ($0.infoUserId value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.upcomingReturn.fromBuffer(value));
+  static final _$getExploreEvents =
+      $grpc.ClientMethod<$0.infoUserId, $0.upcomingReturn>(
+          '/file.EventService/getExploreEvents',
+          ($0.infoUserId value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.upcomingReturn.fromBuffer(value));
 
   EventServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -70,6 +90,28 @@ class EventServiceClient extends $grpc.Client {
   $grpc.ResponseFuture<$0.eventStateMsg> updateEvent($0.updateEventInfo request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$updateEvent, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.upcomingReturn> getUpcomingEvents(
+      $0.infoUserId request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getUpcomingEvents, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.upcomingReturn> getMyEvents($0.infoUserId request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getMyEvents, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.upcomingReturn> getOtherEvents($0.infoUserId request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getOtherEvents, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.upcomingReturn> getExploreEvents(
+      $0.infoUserId request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getExploreEvents, request, options: options);
   }
 }
 
@@ -112,6 +154,34 @@ abstract class EventServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.updateEventInfo.fromBuffer(value),
         ($0.eventStateMsg value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.infoUserId, $0.upcomingReturn>(
+        'getUpcomingEvents',
+        getUpcomingEvents_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.infoUserId.fromBuffer(value),
+        ($0.upcomingReturn value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.infoUserId, $0.upcomingReturn>(
+        'getMyEvents',
+        getMyEvents_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.infoUserId.fromBuffer(value),
+        ($0.upcomingReturn value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.infoUserId, $0.upcomingReturn>(
+        'getOtherEvents',
+        getOtherEvents_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.infoUserId.fromBuffer(value),
+        ($0.upcomingReturn value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.infoUserId, $0.upcomingReturn>(
+        'getExploreEvents',
+        getExploreEvents_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.infoUserId.fromBuffer(value),
+        ($0.upcomingReturn value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.eventUserInfo> getUserEventInfo_Pre(
@@ -139,6 +209,26 @@ abstract class EventServiceBase extends $grpc.Service {
     return updateEvent(call, await request);
   }
 
+  $async.Future<$0.upcomingReturn> getUpcomingEvents_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.infoUserId> request) async {
+    return getUpcomingEvents(call, await request);
+  }
+
+  $async.Future<$0.upcomingReturn> getMyEvents_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.infoUserId> request) async {
+    return getMyEvents(call, await request);
+  }
+
+  $async.Future<$0.upcomingReturn> getOtherEvents_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.infoUserId> request) async {
+    return getOtherEvents(call, await request);
+  }
+
+  $async.Future<$0.upcomingReturn> getExploreEvents_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.infoUserId> request) async {
+    return getExploreEvents(call, await request);
+  }
+
   $async.Future<$0.eventUserInfo> getUserEventInfo(
       $grpc.ServiceCall call, $0.infoId request);
   $async.Future<$0.eventAdminInfo> getAdminEventInfo(
@@ -149,6 +239,14 @@ abstract class EventServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.createEventInfo request);
   $async.Future<$0.eventStateMsg> updateEvent(
       $grpc.ServiceCall call, $0.updateEventInfo request);
+  $async.Future<$0.upcomingReturn> getUpcomingEvents(
+      $grpc.ServiceCall call, $0.infoUserId request);
+  $async.Future<$0.upcomingReturn> getMyEvents(
+      $grpc.ServiceCall call, $0.infoUserId request);
+  $async.Future<$0.upcomingReturn> getOtherEvents(
+      $grpc.ServiceCall call, $0.infoUserId request);
+  $async.Future<$0.upcomingReturn> getExploreEvents(
+      $grpc.ServiceCall call, $0.infoUserId request);
 }
 
 class UserServiceClient extends $grpc.Client {
@@ -264,6 +362,11 @@ class AccessEventServiceClient extends $grpc.Client {
           ($0.entryInfoRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.entryValidation.fromBuffer(value));
+  static final _$registerPublicEvent =
+      $grpc.ClientMethod<$0.publicRegisterInfo, $0.entryResponse>(
+          '/file.AccessEventService/registerPublicEvent',
+          ($0.publicRegisterInfo value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.entryResponse.fromBuffer(value));
 
   AccessEventServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -296,6 +399,12 @@ class AccessEventServiceClient extends $grpc.Client {
       $0.entryInfoRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$validateKeycode, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.entryResponse> registerPublicEvent(
+      $0.publicRegisterInfo request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$registerPublicEvent, request, options: options);
   }
 }
 
@@ -338,6 +447,14 @@ abstract class AccessEventServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.entryInfoRequest.fromBuffer(value),
         ($0.entryValidation value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.publicRegisterInfo, $0.entryResponse>(
+        'registerPublicEvent',
+        registerPublicEvent_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.publicRegisterInfo.fromBuffer(value),
+        ($0.entryResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.entryInfo> getEntryCode_Pre(
@@ -365,6 +482,12 @@ abstract class AccessEventServiceBase extends $grpc.Service {
     return validateKeycode(call, await request);
   }
 
+  $async.Future<$0.entryResponse> registerPublicEvent_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.publicRegisterInfo> request) async {
+    return registerPublicEvent(call, await request);
+  }
+
   $async.Future<$0.entryInfo> getEntryCode(
       $grpc.ServiceCall call, $0.entryParam request);
   $async.Future<$0.entryInfo> getUserInviteLink(
@@ -375,6 +498,8 @@ abstract class AccessEventServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.entryAddUser request);
   $async.Future<$0.entryValidation> validateKeycode(
       $grpc.ServiceCall call, $0.entryInfoRequest request);
+  $async.Future<$0.entryResponse> registerPublicEvent(
+      $grpc.ServiceCall call, $0.publicRegisterInfo request);
 }
 
 class FileUploaderServiceClient extends $grpc.Client {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSettings extends StatelessWidget {
   const UserSettings({Key? key}) : super(key: key);
@@ -80,37 +81,16 @@ class UserSettings extends StatelessWidget {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Colors.grey.shade800,
-                    maximumSize: Size(deviceWidth * 0.8, deviceHeight * 0.2),
-                    minimumSize: Size(deviceWidth * 0.55, deviceHeight * 0.1)),
-                onPressed: () {
-                  // Respond to button press
-                },
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.delete,
-                      color: Colors.white,
-                      size: deviceWidth * 0.1,
-                    ),
-                    Expanded(
-                      child: Text(
-                        'Eliminar conta',
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.fade,
-                        style: TextStyle(
-                            fontSize: deviceHeight * 0.04, color: Colors.white),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
                     primary: Colors.red,
                     fixedSize: Size(deviceWidth * 0.6, deviceHeight * 0.1)),
-                onPressed: () {
+                onPressed: () async {
                   // Respond to button press
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  prefs.setString("username", "");
+                  prefs.setString("token", "");
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/', ModalRoute.withName('/'));
                 },
                 child: Text(
                   'Logout',

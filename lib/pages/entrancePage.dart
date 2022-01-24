@@ -19,12 +19,6 @@ class _Entrance extends State<Entrance> {
   late Timer _timer;
   int _start = 60;
   int _currentIndex = 0;
-  List cardList = [
-    HorizonalEventCard(1, 2),
-    HorizonalEventCard(1, 1),
-    HorizonalEventCard(2, 1),
-    HorizonalEventCard(2, 2)
-  ];
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
     for (var i = 0; i < list.length; i++) {

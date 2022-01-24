@@ -1,20 +1,70 @@
 import 'package:eventapp/pages/eventPage.dart';
+import 'package:eventapp/proto/gen/eventApp.pb.dart';
+import 'package:eventapp/services/eventService.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class EventCard extends StatelessWidget {
+class EventCard extends StatefulWidget {
   final int local;
   final int type;
+  final String imgUrl;
+  final String name;
+  final String date;
+  final int idEvento;
+  EventCard(
+      this.idEvento, this.local, this.type, this.imgUrl, this.name, this.date);
 
-  EventCard(this.local, this.type);
+  @override
+  State<EventCard> createState() => _EventCardState();
+}
+
+class _EventCardState extends State<EventCard> {
+  String _name = "";
+  String _imgUrl = "";
+  String _username = "";
+  String _token = "";
+  eventUserInfo _info = eventUserInfo();
+  void _loadInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString("token");
+
+    if (token != null) {
+      _token = token;
+    } else {
+      _token = "";
+    }
+    _loadAdminInfo();
+    print(_name);
+  }
+
+  void _loadAdminInfo() async {
+    var info = infoId();
+    info.idEvento = widget.idEvento;
+    info.token = _token;
+    var response = await EventService().getUserEventInfo(info);
+    if (response.state) {
+      setState(() => _info = response);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _loadInfo();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    print(widget.local);
+    print(widget.type);
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => DefaultEvent()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => DefaultEvent(_info)));
       },
       child: Container(
         margin: EdgeInsets.only(
@@ -29,12 +79,12 @@ class EventCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
-              width: deviceWidth * 0.18,
+              width: deviceWidth * 0.20,
               height: deviceHeight * 0.15,
-              child: const CircleAvatar(
-                  radius: 10,
-                  backgroundImage: NetworkImage(
-                      'https://imagens.ebc.com.br/DJ3772pOyeUSotv5t6nI6IyagzU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/img20210419125017730.jpg?')),
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: Image.network(widget.imgUrl),
+              ),
             ),
             SizedBox(
               width: deviceWidth * 0.02,
@@ -47,7 +97,7 @@ class EventCard extends StatelessWidget {
                   FittedBox(
                     fit: BoxFit.fitWidth,
                     child: Text(
-                      "Congresso Partidário",
+                      widget.name,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: deviceWidth * 0.07,
@@ -57,7 +107,7 @@ class EventCard extends StatelessWidget {
                   FittedBox(
                     fit: BoxFit.fitWidth,
                     child: Text(
-                      "12/01/2022",
+                      widget.date.split('.')[0],
                       style: TextStyle(
                           fontSize: deviceWidth * 0.04,
                           fontWeight: FontWeight.w300),
@@ -71,7 +121,7 @@ class EventCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  local == 1
+                  widget.local == 2
                       ? Icon(
                           Icons.computer,
                           color: Colors.orange,
@@ -82,7 +132,7 @@ class EventCard extends StatelessWidget {
                           color: Colors.amber,
                           size: deviceWidth * 0.08,
                         ),
-                  type == 1
+                  widget.type == 1
                       ? Icon(
                           Icons.lock_open,
                           color: Colors.green,

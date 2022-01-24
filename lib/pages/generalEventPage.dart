@@ -1,9 +1,17 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:eventapp/components/horizontalEventCard.dart';
+import 'package:eventapp/proto/gen/eventApp.pb.dart';
 import 'package:flutter/material.dart';
 
 class GeneralEvent extends StatefulWidget {
-  const GeneralEvent({Key? key}) : super(key: key);
+  List<eventOverview> myEventsList = List<eventOverview>.empty(growable: true);
+  List<eventOverview> otherEventsList =
+      List<eventOverview>.empty(growable: true);
+  GeneralEvent(
+      List<eventOverview> _myEventsList, List<eventOverview> _otherEventsList) {
+    this.myEventsList = _myEventsList;
+    this.otherEventsList = _otherEventsList;
+  }
 
   @override
   State<GeneralEvent> createState() => _GeneralEventState();
@@ -11,12 +19,6 @@ class GeneralEvent extends StatefulWidget {
 
 class _GeneralEventState extends State<GeneralEvent> {
   int _currentIndex = 0;
-  List cardList = [
-    HorizonalEventCard(1, 2),
-    HorizonalEventCard(1, 1),
-    HorizonalEventCard(2, 1),
-    HorizonalEventCard(2, 2)
-  ];
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
     for (var i = 0; i < list.length; i++) {
@@ -54,7 +56,7 @@ class _GeneralEventState extends State<GeneralEvent> {
                     });
                   },
                 ),
-                items: cardList.map((card) {
+                items: widget.otherEventsList.map((card) {
                   return Builder(builder: (BuildContext context) {
                     return Container(
                       height: MediaQuery.of(context).size.height * 0.32,
@@ -67,7 +69,13 @@ class _GeneralEventState extends State<GeneralEvent> {
                           color: Colors.grey,
                           width: 2,
                         ),
-                        child: card,
+                        child: HorizonalEventCard(
+                            card.eventId,
+                            card.eventPlace,
+                            card.eventType,
+                            card.imgUrl,
+                            card.name,
+                            card.startDate.toDateTime().toString()),
                       ),
                     );
                   });
@@ -96,7 +104,7 @@ class _GeneralEventState extends State<GeneralEvent> {
                     });
                   },
                 ),
-                items: cardList.map((card) {
+                items: widget.myEventsList.map((card) {
                   return Builder(builder: (BuildContext context) {
                     return Container(
                       height: MediaQuery.of(context).size.height * 0.32,
@@ -109,7 +117,13 @@ class _GeneralEventState extends State<GeneralEvent> {
                             color: Colors.amber.shade200,
                             width: 2,
                             style: BorderStyle.solid),
-                        child: card,
+                        child: HorizonalEventCard(
+                            card.eventId,
+                            card.eventPlace,
+                            card.eventType,
+                            card.imgUrl,
+                            card.name,
+                            card.startDate.toDateTime().toString()),
                       ),
                     );
                   });

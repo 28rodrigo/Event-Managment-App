@@ -1,19 +1,70 @@
+import 'package:eventapp/pages/adminEventPage.dart';
 import 'package:eventapp/pages/eventPage.dart';
+import 'package:eventapp/proto/gen/eventApp.pb.dart';
+import 'package:eventapp/services/eventService.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HorizonalEventCard extends StatelessWidget {
+class HorizonalEventCard extends StatefulWidget {
   final int local;
   final int type;
+  final int idEvento;
+  final String imgUrl;
+  final String name;
+  final String date;
 
-  HorizonalEventCard(this.local, this.type);
+  HorizonalEventCard(
+      this.idEvento, this.local, this.type, this.imgUrl, this.name, this.date);
+
+  @override
+  State<HorizonalEventCard> createState() => _HorizonalEventCardState();
+}
+
+class _HorizonalEventCardState extends State<HorizonalEventCard> {
+  String _name = "";
+  String _imgUrl = "";
+  String _username = "";
+  String _token = "";
+  eventAdminInfo _info = eventAdminInfo();
+  void _loadInfo() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString("token");
+
+    if (token != null) {
+      _token = token;
+    } else {
+      _token = "";
+    }
+    _loadAdminInfo();
+    print(_name);
+  }
+
+  void _loadAdminInfo() async {
+    var info = infoId();
+    info.idEvento = widget.idEvento;
+    info.token = _token;
+    var response = await EventService().getAdminEventInfo(info);
+    if (response.state) {
+      setState(() => _info = response);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _loadInfo();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceWidth = MediaQuery.of(context).size.width;
     final deviceHeight = MediaQuery.of(context).size.height;
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => DefaultEvent()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => AdminEvent(_info)));
       },
       child: Container(
         margin: EdgeInsets.only(
@@ -33,8 +84,7 @@ class HorizonalEventCard extends StatelessWidget {
                     border: Border.all(width: 2, color: Colors.black)),
                 child: FittedBox(
                   fit: BoxFit.cover,
-                  child: Image.network(
-                      'https://imagens.ebc.com.br/DJ3772pOyeUSotv5t6nI6IyagzU=/1170x700/smart/https://agenciabrasil.ebc.com.br/sites/default/files/thumbnails/image/img20210419125017730.jpg?'),
+                  child: Image.network(widget.imgUrl),
                 ),
               ),
             ),
@@ -46,7 +96,7 @@ class HorizonalEventCard extends StatelessWidget {
                   FittedBox(
                     fit: BoxFit.fitWidth,
                     child: Text(
-                      "Congresso Partidário",
+                      widget.name,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: deviceWidth * 0.07,
@@ -59,7 +109,7 @@ class HorizonalEventCard extends StatelessWidget {
                       FittedBox(
                         fit: BoxFit.fitWidth,
                         child: Text(
-                          "12/01/2022",
+                          widget.date.split('.')[0],
                           style: TextStyle(
                               fontSize: deviceWidth * 0.04,
                               fontWeight: FontWeight.w300),
@@ -67,7 +117,7 @@ class HorizonalEventCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          local == 1
+                          widget.local == 2
                               ? Icon(
                                   Icons.computer,
                                   color: Colors.orange,
@@ -78,7 +128,7 @@ class HorizonalEventCard extends StatelessWidget {
                                   color: Colors.amber,
                                   size: deviceWidth * 0.08,
                                 ),
-                          type == 1
+                          widget.type == 1
                               ? Icon(
                                   Icons.lock_open,
                                   color: Colors.green,
