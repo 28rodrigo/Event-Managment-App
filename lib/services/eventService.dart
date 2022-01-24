@@ -71,4 +71,11 @@ class EventService {
     var response = await client.getExploreEvents(info);
     return response;
   }
+
+  Future<upcomingReturn> getInviteEvents(infoUserId info) async {
+    var client = EventServiceClient(GrpcClientSingleton().client,
+        options: CallOptions(timeout: Duration(seconds: 30)));
+    var response = await client.getInviteEvents(info);
+    return response;
+  }
 }

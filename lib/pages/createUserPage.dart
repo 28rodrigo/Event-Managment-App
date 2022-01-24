@@ -15,6 +15,7 @@ class CreateUser extends StatefulWidget {
 
 class _CreateUserState extends State<CreateUser> {
   var usernameController = TextEditingController(text: "");
+  var nomeController = TextEditingController(text: "");
   var emailController = TextEditingController(text: "");
   var ageController = TextEditingController(text: "");
   var orgController = TextEditingController(text: "");
@@ -59,6 +60,21 @@ class _CreateUserState extends State<CreateUser> {
                     decoration: InputDecoration(
                       icon: Icon(Icons.person),
                       labelText: 'Username',
+                      // errorText: 'Username incorreto!',
+                      border: const OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      top: deviceHeight * 0.03, bottom: deviceHeight * 0.03),
+                  child: TextFormField(
+                    controller: nomeController,
+
+                    // ignore: prefer_const_constructors
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.person),
+                      labelText: 'Nome',
                       // errorText: 'Username incorreto!',
                       border: const OutlineInputBorder(),
                     ),
@@ -163,6 +179,7 @@ class _CreateUserState extends State<CreateUser> {
                     }
                     var newuser = createUserInfo();
                     newuser.username = usernameController.text;
+                    newuser.name = nomeController.text;
                     newuser.email = emailController.text;
                     newuser.age = int.parse(ageController.text);
                     newuser.organization = orgController.text;

@@ -2132,6 +2132,170 @@ class userStateMsg extends $pb.GeneratedMessage {
   void clearStatusMsg() => clearField(3);
 }
 
+class QRentry extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'QRentry', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'keycode')
+    ..hasRequiredFields = false
+  ;
+
+  QRentry._() : super();
+  factory QRentry({
+    $core.String? username,
+    $core.String? token,
+    $core.String? keycode,
+  }) {
+    final _result = create();
+    if (username != null) {
+      _result.username = username;
+    }
+    if (token != null) {
+      _result.token = token;
+    }
+    if (keycode != null) {
+      _result.keycode = keycode;
+    }
+    return _result;
+  }
+  factory QRentry.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory QRentry.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  QRentry clone() => QRentry()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  QRentry copyWith(void Function(QRentry) updates) => super.copyWith((message) => updates(message as QRentry)) as QRentry; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static QRentry create() => QRentry._();
+  QRentry createEmptyInstance() => create();
+  static $pb.PbList<QRentry> createRepeated() => $pb.PbList<QRentry>();
+  @$core.pragma('dart2js:noInline')
+  static QRentry getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<QRentry>(create);
+  static QRentry? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get username => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set username($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUsername() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUsername() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get token => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set token($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearToken() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get keycode => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set keycode($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasKeycode() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearKeycode() => clearField(3);
+}
+
+class publicInviteInfo extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'publicInviteInfo', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'eventId', $pb.PbFieldType.O3, protoName: 'eventId')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
+    ..aOB(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'accept')
+    ..hasRequiredFields = false
+  ;
+
+  publicInviteInfo._() : super();
+  factory publicInviteInfo({
+    $core.String? username,
+    $core.int? eventId,
+    $core.String? token,
+    $core.bool? accept,
+  }) {
+    final _result = create();
+    if (username != null) {
+      _result.username = username;
+    }
+    if (eventId != null) {
+      _result.eventId = eventId;
+    }
+    if (token != null) {
+      _result.token = token;
+    }
+    if (accept != null) {
+      _result.accept = accept;
+    }
+    return _result;
+  }
+  factory publicInviteInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory publicInviteInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  publicInviteInfo clone() => publicInviteInfo()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  publicInviteInfo copyWith(void Function(publicInviteInfo) updates) => super.copyWith((message) => updates(message as publicInviteInfo)) as publicInviteInfo; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static publicInviteInfo create() => publicInviteInfo._();
+  publicInviteInfo createEmptyInstance() => create();
+  static $pb.PbList<publicInviteInfo> createRepeated() => $pb.PbList<publicInviteInfo>();
+  @$core.pragma('dart2js:noInline')
+  static publicInviteInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<publicInviteInfo>(create);
+  static publicInviteInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get username => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set username($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasUsername() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearUsername() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get eventId => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set eventId($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasEventId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearEventId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get token => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set token($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasToken() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearToken() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.bool get accept => $_getBF(3);
+  @$pb.TagNumber(4)
+  set accept($core.bool v) { $_setBool(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasAccept() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAccept() => clearField(4);
+}
+
 class publicRegisterInfo extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'publicRegisterInfo', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
@@ -2210,31 +2374,31 @@ class publicRegisterInfo extends $pb.GeneratedMessage {
 class entryInfoRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'entryInfoRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'keyCode', protoName: 'keyCode')
-    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', $pb.PbFieldType.O3, protoName: 'userId')
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'guestId', $pb.PbFieldType.O3, protoName: 'guestId')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
     ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'eventId', $pb.PbFieldType.O3, protoName: 'eventId')
+    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
     ..hasRequiredFields = false
   ;
 
   entryInfoRequest._() : super();
   factory entryInfoRequest({
     $core.String? keyCode,
-    $core.int? userId,
-    $core.int? guestId,
+    $core.String? username,
     $core.int? eventId,
+    $core.String? token,
   }) {
     final _result = create();
     if (keyCode != null) {
       _result.keyCode = keyCode;
     }
-    if (userId != null) {
-      _result.userId = userId;
-    }
-    if (guestId != null) {
-      _result.guestId = guestId;
+    if (username != null) {
+      _result.username = username;
     }
     if (eventId != null) {
       _result.eventId = eventId;
+    }
+    if (token != null) {
+      _result.token = token;
     }
     return _result;
   }
@@ -2269,31 +2433,31 @@ class entryInfoRequest extends $pb.GeneratedMessage {
   void clearKeyCode() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.int get userId => $_getIZ(1);
+  $core.String get username => $_getSZ(1);
   @$pb.TagNumber(2)
-  set userId($core.int v) { $_setSignedInt32(1, v); }
+  set username($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasUserId() => $_has(1);
+  $core.bool hasUsername() => $_has(1);
   @$pb.TagNumber(2)
-  void clearUserId() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.int get guestId => $_getIZ(2);
-  @$pb.TagNumber(3)
-  set guestId($core.int v) { $_setSignedInt32(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasGuestId() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearGuestId() => clearField(3);
+  void clearUsername() => clearField(2);
 
   @$pb.TagNumber(4)
-  $core.int get eventId => $_getIZ(3);
+  $core.int get eventId => $_getIZ(2);
   @$pb.TagNumber(4)
-  set eventId($core.int v) { $_setSignedInt32(3, v); }
+  set eventId($core.int v) { $_setSignedInt32(2, v); }
   @$pb.TagNumber(4)
-  $core.bool hasEventId() => $_has(3);
+  $core.bool hasEventId() => $_has(2);
   @$pb.TagNumber(4)
   void clearEventId() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get token => $_getSZ(3);
+  @$pb.TagNumber(5)
+  set token($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasToken() => $_has(3);
+  @$pb.TagNumber(5)
+  void clearToken() => clearField(5);
 }
 
 class entryValidation extends $pb.GeneratedMessage {
@@ -2373,32 +2537,27 @@ class entryValidation extends $pb.GeneratedMessage {
 
 class entryAddUser extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'entryAddUser', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', $pb.PbFieldType.O3, protoName: 'userId')
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'eventId', $pb.PbFieldType.O3, protoName: 'eventId')
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'guestId', $pb.PbFieldType.O3, protoName: 'guestId')
-    ..aOM<$1.Timestamp>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'expireDate', protoName: 'expireDate', subBuilder: $1.Timestamp.create)
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'guestUsername', protoName: 'guestUsername')
     ..hasRequiredFields = false
   ;
 
   entryAddUser._() : super();
   factory entryAddUser({
-    $core.int? userId,
+    $core.String? username,
     $core.int? eventId,
-    $core.int? guestId,
-    $1.Timestamp? expireDate,
+    $core.String? guestUsername,
   }) {
     final _result = create();
-    if (userId != null) {
-      _result.userId = userId;
+    if (username != null) {
+      _result.username = username;
     }
     if (eventId != null) {
       _result.eventId = eventId;
     }
-    if (guestId != null) {
-      _result.guestId = guestId;
-    }
-    if (expireDate != null) {
-      _result.expireDate = expireDate;
+    if (guestUsername != null) {
+      _result.guestUsername = guestUsername;
     }
     return _result;
   }
@@ -2424,13 +2583,13 @@ class entryAddUser extends $pb.GeneratedMessage {
   static entryAddUser? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get userId => $_getIZ(0);
+  $core.String get username => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userId($core.int v) { $_setSignedInt32(0, v); }
+  set username($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUserId() => $_has(0);
+  $core.bool hasUsername() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUserId() => clearField(1);
+  void clearUsername() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.int get eventId => $_getIZ(1);
@@ -2442,24 +2601,13 @@ class entryAddUser extends $pb.GeneratedMessage {
   void clearEventId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.int get guestId => $_getIZ(2);
+  $core.String get guestUsername => $_getSZ(2);
   @$pb.TagNumber(3)
-  set guestId($core.int v) { $_setSignedInt32(2, v); }
+  set guestUsername($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasGuestId() => $_has(2);
+  $core.bool hasGuestUsername() => $_has(2);
   @$pb.TagNumber(3)
-  void clearGuestId() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $1.Timestamp get expireDate => $_getN(3);
-  @$pb.TagNumber(4)
-  set expireDate($1.Timestamp v) { setField(4, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasExpireDate() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearExpireDate() => clearField(4);
-  @$pb.TagNumber(4)
-  $1.Timestamp ensureExpireDate() => $_ensure(3);
+  void clearGuestUsername() => clearField(3);
 }
 
 class entryResponse extends $pb.GeneratedMessage {
@@ -2525,22 +2673,27 @@ class entryResponse extends $pb.GeneratedMessage {
 
 class entryParam extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'entryParam', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', $pb.PbFieldType.O3, protoName: 'userId')
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'eventId', $pb.PbFieldType.O3, protoName: 'eventId')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
     ..hasRequiredFields = false
   ;
 
   entryParam._() : super();
   factory entryParam({
-    $core.int? userId,
+    $core.String? username,
     $core.int? eventId,
+    $core.String? token,
   }) {
     final _result = create();
-    if (userId != null) {
-      _result.userId = userId;
+    if (username != null) {
+      _result.username = username;
     }
     if (eventId != null) {
       _result.eventId = eventId;
+    }
+    if (token != null) {
+      _result.token = token;
     }
     return _result;
   }
@@ -2566,13 +2719,13 @@ class entryParam extends $pb.GeneratedMessage {
   static entryParam? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get userId => $_getIZ(0);
+  $core.String get username => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userId($core.int v) { $_setSignedInt32(0, v); }
+  set username($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUserId() => $_has(0);
+  $core.bool hasUsername() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUserId() => clearField(1);
+  void clearUsername() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.int get eventId => $_getIZ(1);
@@ -2582,6 +2735,15 @@ class entryParam extends $pb.GeneratedMessage {
   $core.bool hasEventId() => $_has(1);
   @$pb.TagNumber(2)
   void clearEventId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get token => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set token($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasToken() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearToken() => clearField(3);
 }
 
 class entryGuestParam extends $pb.GeneratedMessage {
@@ -2661,22 +2823,27 @@ class entryGuestParam extends $pb.GeneratedMessage {
 
 class entryGlobalParam extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'entryGlobalParam', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'userId', $pb.PbFieldType.O3, protoName: 'userId')
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'username')
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'eventId', $pb.PbFieldType.O3, protoName: 'eventId')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'token')
     ..hasRequiredFields = false
   ;
 
   entryGlobalParam._() : super();
   factory entryGlobalParam({
-    $core.int? userId,
+    $core.String? username,
     $core.int? eventId,
+    $core.String? token,
   }) {
     final _result = create();
-    if (userId != null) {
-      _result.userId = userId;
+    if (username != null) {
+      _result.username = username;
     }
     if (eventId != null) {
       _result.eventId = eventId;
+    }
+    if (token != null) {
+      _result.token = token;
     }
     return _result;
   }
@@ -2702,13 +2869,13 @@ class entryGlobalParam extends $pb.GeneratedMessage {
   static entryGlobalParam? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get userId => $_getIZ(0);
+  $core.String get username => $_getSZ(0);
   @$pb.TagNumber(1)
-  set userId($core.int v) { $_setSignedInt32(0, v); }
+  set username($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasUserId() => $_has(0);
+  $core.bool hasUsername() => $_has(0);
   @$pb.TagNumber(1)
-  void clearUserId() => clearField(1);
+  void clearUsername() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.int get eventId => $_getIZ(1);
@@ -2718,12 +2885,20 @@ class entryGlobalParam extends $pb.GeneratedMessage {
   $core.bool hasEventId() => $_has(1);
   @$pb.TagNumber(2)
   void clearEventId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get token => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set token($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasToken() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearToken() => clearField(3);
 }
 
 class entryInfo extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'entryInfo', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'file'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'keyCode', protoName: 'keyCode')
-    ..aOM<$1.Timestamp>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'expireDate', protoName: 'expireDate', subBuilder: $1.Timestamp.create)
     ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'status')
     ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'statusMsg', protoName: 'statusMsg')
     ..hasRequiredFields = false
@@ -2732,16 +2907,12 @@ class entryInfo extends $pb.GeneratedMessage {
   entryInfo._() : super();
   factory entryInfo({
     $core.String? keyCode,
-    $1.Timestamp? expireDate,
     $core.bool? status,
     $core.String? statusMsg,
   }) {
     final _result = create();
     if (keyCode != null) {
       _result.keyCode = keyCode;
-    }
-    if (expireDate != null) {
-      _result.expireDate = expireDate;
     }
     if (status != null) {
       _result.status = status;
@@ -2781,32 +2952,21 @@ class entryInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(1)
   void clearKeyCode() => clearField(1);
 
-  @$pb.TagNumber(2)
-  $1.Timestamp get expireDate => $_getN(1);
-  @$pb.TagNumber(2)
-  set expireDate($1.Timestamp v) { setField(2, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasExpireDate() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearExpireDate() => clearField(2);
-  @$pb.TagNumber(2)
-  $1.Timestamp ensureExpireDate() => $_ensure(1);
-
   @$pb.TagNumber(3)
-  $core.bool get status => $_getBF(2);
+  $core.bool get status => $_getBF(1);
   @$pb.TagNumber(3)
-  set status($core.bool v) { $_setBool(2, v); }
+  set status($core.bool v) { $_setBool(1, v); }
   @$pb.TagNumber(3)
-  $core.bool hasStatus() => $_has(2);
+  $core.bool hasStatus() => $_has(1);
   @$pb.TagNumber(3)
   void clearStatus() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get statusMsg => $_getSZ(3);
+  $core.String get statusMsg => $_getSZ(2);
   @$pb.TagNumber(4)
-  set statusMsg($core.String v) { $_setString(3, v); }
+  set statusMsg($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(4)
-  $core.bool hasStatusMsg() => $_has(3);
+  $core.bool hasStatusMsg() => $_has(2);
   @$pb.TagNumber(4)
   void clearStatusMsg() => clearField(4);
 }

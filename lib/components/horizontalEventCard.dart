@@ -1,5 +1,6 @@
 import 'package:eventapp/pages/adminEventPage.dart';
 import 'package:eventapp/pages/eventPage.dart';
+import 'package:eventapp/pages/eventsPage.dart';
 import 'package:eventapp/proto/gen/eventApp.pb.dart';
 import 'package:eventapp/services/eventService.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +13,10 @@ class HorizonalEventCard extends StatefulWidget {
   final String imgUrl;
   final String name;
   final String date;
+  final bool admin;
 
-  HorizonalEventCard(
-      this.idEvento, this.local, this.type, this.imgUrl, this.name, this.date);
+  HorizonalEventCard(this.idEvento, this.local, this.type, this.imgUrl,
+      this.name, this.date, this.admin);
 
   @override
   State<HorizonalEventCard> createState() => _HorizonalEventCardState();
@@ -26,6 +28,7 @@ class _HorizonalEventCardState extends State<HorizonalEventCard> {
   String _username = "";
   String _token = "";
   eventAdminInfo _info = eventAdminInfo();
+  eventUserInfo _infouser = eventUserInfo();
   void _loadInfo() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.getString("token");
@@ -35,7 +38,10 @@ class _HorizonalEventCardState extends State<HorizonalEventCard> {
     } else {
       _token = "";
     }
-    _loadAdminInfo();
+    if (widget.admin)
+      _loadAdminInfo();
+    else
+      _loadUserInfo();
     print(_name);
   }
 
@@ -46,6 +52,16 @@ class _HorizonalEventCardState extends State<HorizonalEventCard> {
     var response = await EventService().getAdminEventInfo(info);
     if (response.state) {
       setState(() => _info = response);
+    }
+  }
+
+  void _loadUserInfo() async {
+    var info = infoId();
+    info.idEvento = widget.idEvento;
+    info.token = _token;
+    var response = await EventService().getUserEventInfo(info);
+    if (response.state) {
+      setState(() => _infouser = response);
     }
   }
 
@@ -63,8 +79,14 @@ class _HorizonalEventCardState extends State<HorizonalEventCard> {
     final deviceHeight = MediaQuery.of(context).size.height;
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => AdminEvent(_info)));
+        if (widget.admin)
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AdminEvent(_info)));
+        else
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DefaultEvent(_infouser, true)));
       },
       child: Container(
         margin: EdgeInsets.only(

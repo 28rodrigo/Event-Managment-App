@@ -75,7 +75,8 @@ class _GeneralEventState extends State<GeneralEvent> {
                             card.eventType,
                             card.imgUrl,
                             card.name,
-                            card.startDate.toDateTime().toString()),
+                            card.startDate.toDateTime().toString(),
+                            false),
                       ),
                     );
                   });
@@ -123,7 +124,8 @@ class _GeneralEventState extends State<GeneralEvent> {
                             card.eventType,
                             card.imgUrl,
                             card.name,
-                            card.startDate.toDateTime().toString()),
+                            card.startDate.toDateTime().toString(),
+                            true),
                       ),
                     );
                   });

@@ -63,8 +63,10 @@ class _EventCardState extends State<EventCard> {
     final deviceHeight = MediaQuery.of(context).size.height;
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => DefaultEvent(_info)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DefaultEvent(_info, false)));
       },
       child: Container(
         margin: EdgeInsets.only(

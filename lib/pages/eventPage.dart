@@ -1,3 +1,4 @@
+import 'package:eventapp/pages/entrancePage.dart';
 import 'package:eventapp/proto/gen/eventApp.pb.dart';
 import 'package:eventapp/services/accessService.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class DefaultEvent extends StatefulWidget {
   eventUserInfo _info = eventUserInfo();
-  DefaultEvent(this._info);
+  bool registed;
+  DefaultEvent(this._info, this.registed);
 
   @override
   State<DefaultEvent> createState() => _DefaultEventState();
@@ -31,6 +33,48 @@ class _DefaultEventState extends State<DefaultEvent> {
       _token = token;
     } else {
       _token = "";
+    }
+  }
+
+  void _register() async {
+    publicRegisterInfo info = publicRegisterInfo();
+    info.eventId = widget._info.eventId;
+    info.token = _token;
+    info.username = _username;
+
+    var response = await AccessService().registerPublicEven(info);
+    if (response.status) {
+      final snackBar = SnackBar(
+        content: Text('Registado com sucesso!'),
+        duration: Duration(seconds: 5),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/home', ModalRoute.withName('/home'));
+    }
+  }
+
+  void _getAccess() async {
+    var userInfo = entryParam();
+    userInfo.eventId = widget._info.eventId;
+    userInfo.token = _token;
+    userInfo.username = _username;
+    var response = await AccessService().getEntry(userInfo);
+
+    if (response.status) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  Entrance(response.keyCode, widget._info.name)));
+    } else {
+      final snackBar = SnackBar(
+        content: Text('Erro a aceder evento!'),
+        duration: Duration(seconds: 5),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/home', ModalRoute.withName('/home'));
     }
   }
 
@@ -97,29 +141,16 @@ class _DefaultEventState extends State<DefaultEvent> {
                                 fixedSize: Size(
                                     deviceWidth * 0.55, deviceHeight * 0.08)),
                             onPressed: () async {
-                              publicRegisterInfo info = publicRegisterInfo();
-                              info.eventId = widget._info.eventId;
-                              info.token = _token;
-                              info.username = _username;
-
-                              var response = await AccessService()
-                                  .registerPublicEven(info);
-                              if (response.status) {
-                                final snackBar = SnackBar(
-                                  content: Text('Registado com sucesso!'),
-                                  duration: Duration(seconds: 5),
-                                );
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar);
-                                Navigator.pushNamedAndRemoveUntil(context,
-                                    '/home', ModalRoute.withName('/home'));
-                              }
+                              if (widget.registed)
+                                _getAccess();
+                              else
+                                _register();
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 Text(
-                                  'Registar',
+                                  widget.registed ? 'Aceder' : 'Registar',
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyText1

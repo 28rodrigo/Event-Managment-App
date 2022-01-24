@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class Entrance extends StatefulWidget {
-  const Entrance({Key? key}) : super(key: key);
+  String keyCode;
+  String eventName;
 
+  Entrance(this.keyCode, this.eventName);
   @override
   State<Entrance> createState() => _Entrance();
 }
@@ -17,7 +19,7 @@ class _Entrance extends State<Entrance> {
     startTimer();
   }
   late Timer _timer;
-  int _start = 60;
+  int _start = 60 * 10;
   int _currentIndex = 0;
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
@@ -65,14 +67,14 @@ class _Entrance extends State<Entrance> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              "Congresso partidário",
+              widget.eventName,
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontSize: deviceWidth * 0.2, fontWeight: FontWeight.bold),
             ),
             QrImage(
               backgroundColor: Colors.white,
-              data: "12345",
+              data: widget.keyCode,
               version: QrVersions.auto,
               size: deviceWidth * 0.7,
             ),

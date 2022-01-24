@@ -3,6 +3,7 @@ import 'package:eventapp/pages/eventPage.dart';
 import 'package:eventapp/pages/eventsPage.dart';
 import 'package:eventapp/pages/userSettingPage.dart';
 import 'package:eventapp/proto/gen/eventApp.pb.dart';
+import 'package:eventapp/services/accessService.dart';
 import 'package:eventapp/services/eventService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -81,14 +82,30 @@ class _MainHomeState extends State<MainHome> {
     } on PlatformException {
       barcodeScanRes = 'Failed to get platform version.';
     }
+    var userInfo = QRentry();
+    userInfo.keycode = barcodeScanRes;
+    userInfo.token = _token;
+    userInfo.username = _username;
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
+    var response = await AccessService().registerQREvent(userInfo);
 
-    setState(() {
-      _scanBarcode = barcodeScanRes;
-    });
+    if (response.status) {
+      final snackBar = SnackBar(
+        content: Text('Registado no evento!'),
+        duration: Duration(seconds: 5),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/home', ModalRoute.withName('/home'));
+    } else {
+      final snackBar = SnackBar(
+        content: Text('Erro a registar evento!'),
+        duration: Duration(seconds: 5),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/home', ModalRoute.withName('/home'));
+    }
   }
 
   @override

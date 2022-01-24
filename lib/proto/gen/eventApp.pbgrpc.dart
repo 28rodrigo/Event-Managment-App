@@ -60,6 +60,11 @@ class EventServiceClient extends $grpc.Client {
           '/file.EventService/getExploreEvents',
           ($0.infoUserId value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.upcomingReturn.fromBuffer(value));
+  static final _$getInviteEvents =
+      $grpc.ClientMethod<$0.infoUserId, $0.upcomingReturn>(
+          '/file.EventService/getInviteEvents',
+          ($0.infoUserId value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.upcomingReturn.fromBuffer(value));
 
   EventServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -112,6 +117,11 @@ class EventServiceClient extends $grpc.Client {
       $0.infoUserId request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getExploreEvents, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.upcomingReturn> getInviteEvents($0.infoUserId request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$getInviteEvents, request, options: options);
   }
 }
 
@@ -182,6 +192,13 @@ abstract class EventServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.infoUserId.fromBuffer(value),
         ($0.upcomingReturn value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.infoUserId, $0.upcomingReturn>(
+        'getInviteEvents',
+        getInviteEvents_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.infoUserId.fromBuffer(value),
+        ($0.upcomingReturn value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.eventUserInfo> getUserEventInfo_Pre(
@@ -229,6 +246,11 @@ abstract class EventServiceBase extends $grpc.Service {
     return getExploreEvents(call, await request);
   }
 
+  $async.Future<$0.upcomingReturn> getInviteEvents_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.infoUserId> request) async {
+    return getInviteEvents(call, await request);
+  }
+
   $async.Future<$0.eventUserInfo> getUserEventInfo(
       $grpc.ServiceCall call, $0.infoId request);
   $async.Future<$0.eventAdminInfo> getAdminEventInfo(
@@ -246,6 +268,8 @@ abstract class EventServiceBase extends $grpc.Service {
   $async.Future<$0.upcomingReturn> getOtherEvents(
       $grpc.ServiceCall call, $0.infoUserId request);
   $async.Future<$0.upcomingReturn> getExploreEvents(
+      $grpc.ServiceCall call, $0.infoUserId request);
+  $async.Future<$0.upcomingReturn> getInviteEvents(
       $grpc.ServiceCall call, $0.infoUserId request);
 }
 
@@ -341,11 +365,6 @@ class AccessEventServiceClient extends $grpc.Client {
       '/file.AccessEventService/getEntryCode',
       ($0.entryParam value) => value.writeToBuffer(),
       ($core.List<$core.int> value) => $0.entryInfo.fromBuffer(value));
-  static final _$getUserInviteLink =
-      $grpc.ClientMethod<$0.entryGuestParam, $0.entryInfo>(
-          '/file.AccessEventService/getUserInviteLink',
-          ($0.entryGuestParam value) => value.writeToBuffer(),
-          ($core.List<$core.int> value) => $0.entryInfo.fromBuffer(value));
   static final _$getGlobalinviteLink =
       $grpc.ClientMethod<$0.entryGlobalParam, $0.entryInfo>(
           '/file.AccessEventService/getGlobalinviteLink',
@@ -367,6 +386,16 @@ class AccessEventServiceClient extends $grpc.Client {
           '/file.AccessEventService/registerPublicEvent',
           ($0.publicRegisterInfo value) => value.writeToBuffer(),
           ($core.List<$core.int> value) => $0.entryResponse.fromBuffer(value));
+  static final _$registerInviteEvent =
+      $grpc.ClientMethod<$0.publicInviteInfo, $0.entryResponse>(
+          '/file.AccessEventService/registerInviteEvent',
+          ($0.publicInviteInfo value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.entryResponse.fromBuffer(value));
+  static final _$registerQREvent =
+      $grpc.ClientMethod<$0.QRentry, $0.entryResponse>(
+          '/file.AccessEventService/registerQREvent',
+          ($0.QRentry value) => value.writeToBuffer(),
+          ($core.List<$core.int> value) => $0.entryResponse.fromBuffer(value));
 
   AccessEventServiceClient($grpc.ClientChannel channel,
       {$grpc.CallOptions? options,
@@ -376,12 +405,6 @@ class AccessEventServiceClient extends $grpc.Client {
   $grpc.ResponseFuture<$0.entryInfo> getEntryCode($0.entryParam request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getEntryCode, request, options: options);
-  }
-
-  $grpc.ResponseFuture<$0.entryInfo> getUserInviteLink(
-      $0.entryGuestParam request,
-      {$grpc.CallOptions? options}) {
-    return $createUnaryCall(_$getUserInviteLink, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.entryInfo> getGlobalinviteLink(
@@ -406,6 +429,17 @@ class AccessEventServiceClient extends $grpc.Client {
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$registerPublicEvent, request, options: options);
   }
+
+  $grpc.ResponseFuture<$0.entryResponse> registerInviteEvent(
+      $0.publicInviteInfo request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$registerInviteEvent, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.entryResponse> registerQREvent($0.QRentry request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$registerQREvent, request, options: options);
+  }
 }
 
 abstract class AccessEventServiceBase extends $grpc.Service {
@@ -418,13 +452,6 @@ abstract class AccessEventServiceBase extends $grpc.Service {
         false,
         false,
         ($core.List<$core.int> value) => $0.entryParam.fromBuffer(value),
-        ($0.entryInfo value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.entryGuestParam, $0.entryInfo>(
-        'getUserInviteLink',
-        getUserInviteLink_Pre,
-        false,
-        false,
-        ($core.List<$core.int> value) => $0.entryGuestParam.fromBuffer(value),
         ($0.entryInfo value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.entryGlobalParam, $0.entryInfo>(
         'getGlobalinviteLink',
@@ -455,16 +482,25 @@ abstract class AccessEventServiceBase extends $grpc.Service {
         ($core.List<$core.int> value) =>
             $0.publicRegisterInfo.fromBuffer(value),
         ($0.entryResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.publicInviteInfo, $0.entryResponse>(
+        'registerInviteEvent',
+        registerInviteEvent_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.publicInviteInfo.fromBuffer(value),
+        ($0.entryResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.QRentry, $0.entryResponse>(
+        'registerQREvent',
+        registerQREvent_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) => $0.QRentry.fromBuffer(value),
+        ($0.entryResponse value) => value.writeToBuffer()));
   }
 
   $async.Future<$0.entryInfo> getEntryCode_Pre(
       $grpc.ServiceCall call, $async.Future<$0.entryParam> request) async {
     return getEntryCode(call, await request);
-  }
-
-  $async.Future<$0.entryInfo> getUserInviteLink_Pre(
-      $grpc.ServiceCall call, $async.Future<$0.entryGuestParam> request) async {
-    return getUserInviteLink(call, await request);
   }
 
   $async.Future<$0.entryInfo> getGlobalinviteLink_Pre($grpc.ServiceCall call,
@@ -488,10 +524,19 @@ abstract class AccessEventServiceBase extends $grpc.Service {
     return registerPublicEvent(call, await request);
   }
 
+  $async.Future<$0.entryResponse> registerInviteEvent_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.publicInviteInfo> request) async {
+    return registerInviteEvent(call, await request);
+  }
+
+  $async.Future<$0.entryResponse> registerQREvent_Pre(
+      $grpc.ServiceCall call, $async.Future<$0.QRentry> request) async {
+    return registerQREvent(call, await request);
+  }
+
   $async.Future<$0.entryInfo> getEntryCode(
       $grpc.ServiceCall call, $0.entryParam request);
-  $async.Future<$0.entryInfo> getUserInviteLink(
-      $grpc.ServiceCall call, $0.entryGuestParam request);
   $async.Future<$0.entryInfo> getGlobalinviteLink(
       $grpc.ServiceCall call, $0.entryGlobalParam request);
   $async.Future<$0.entryResponse> addUserToEvent(
@@ -500,6 +545,10 @@ abstract class AccessEventServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.entryInfoRequest request);
   $async.Future<$0.entryResponse> registerPublicEvent(
       $grpc.ServiceCall call, $0.publicRegisterInfo request);
+  $async.Future<$0.entryResponse> registerInviteEvent(
+      $grpc.ServiceCall call, $0.publicInviteInfo request);
+  $async.Future<$0.entryResponse> registerQREvent(
+      $grpc.ServiceCall call, $0.QRentry request);
 }
 
 class FileUploaderServiceClient extends $grpc.Client {

@@ -272,6 +272,31 @@ const userStateMsg$json = const {
 
 /// Descriptor for `userStateMsg`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List userStateMsgDescriptor = $convert.base64Decode('Cgx1c2VyU3RhdGVNc2cSFAoFc3RhdGUYASABKAhSBXN0YXRlEg4KAmlkGAIgASgFUgJpZBIcCglzdGF0dXNNc2cYAyABKAlSCXN0YXR1c01zZw==');
+@$core.Deprecated('Use qRentryDescriptor instead')
+const QRentry$json = const {
+  '1': 'QRentry',
+  '2': const [
+    const {'1': 'username', '3': 1, '4': 1, '5': 9, '10': 'username'},
+    const {'1': 'token', '3': 2, '4': 1, '5': 9, '10': 'token'},
+    const {'1': 'keycode', '3': 3, '4': 1, '5': 9, '10': 'keycode'},
+  ],
+};
+
+/// Descriptor for `QRentry`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List qRentryDescriptor = $convert.base64Decode('CgdRUmVudHJ5EhoKCHVzZXJuYW1lGAEgASgJUgh1c2VybmFtZRIUCgV0b2tlbhgCIAEoCVIFdG9rZW4SGAoHa2V5Y29kZRgDIAEoCVIHa2V5Y29kZQ==');
+@$core.Deprecated('Use publicInviteInfoDescriptor instead')
+const publicInviteInfo$json = const {
+  '1': 'publicInviteInfo',
+  '2': const [
+    const {'1': 'username', '3': 1, '4': 1, '5': 9, '10': 'username'},
+    const {'1': 'eventId', '3': 2, '4': 1, '5': 5, '10': 'eventId'},
+    const {'1': 'token', '3': 3, '4': 1, '5': 9, '10': 'token'},
+    const {'1': 'accept', '3': 4, '4': 1, '5': 8, '10': 'accept'},
+  ],
+};
+
+/// Descriptor for `publicInviteInfo`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List publicInviteInfoDescriptor = $convert.base64Decode('ChBwdWJsaWNJbnZpdGVJbmZvEhoKCHVzZXJuYW1lGAEgASgJUgh1c2VybmFtZRIYCgdldmVudElkGAIgASgFUgdldmVudElkEhQKBXRva2VuGAMgASgJUgV0b2tlbhIWCgZhY2NlcHQYBCABKAhSBmFjY2VwdA==');
 @$core.Deprecated('Use publicRegisterInfoDescriptor instead')
 const publicRegisterInfo$json = const {
   '1': 'publicRegisterInfo',
@@ -289,14 +314,14 @@ const entryInfoRequest$json = const {
   '1': 'entryInfoRequest',
   '2': const [
     const {'1': 'keyCode', '3': 1, '4': 1, '5': 9, '10': 'keyCode'},
-    const {'1': 'userId', '3': 2, '4': 1, '5': 5, '10': 'userId'},
-    const {'1': 'guestId', '3': 3, '4': 1, '5': 5, '10': 'guestId'},
+    const {'1': 'username', '3': 2, '4': 1, '5': 9, '10': 'username'},
     const {'1': 'eventId', '3': 4, '4': 1, '5': 5, '10': 'eventId'},
+    const {'1': 'token', '3': 5, '4': 1, '5': 9, '10': 'token'},
   ],
 };
 
 /// Descriptor for `entryInfoRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List entryInfoRequestDescriptor = $convert.base64Decode('ChBlbnRyeUluZm9SZXF1ZXN0EhgKB2tleUNvZGUYASABKAlSB2tleUNvZGUSFgoGdXNlcklkGAIgASgFUgZ1c2VySWQSGAoHZ3Vlc3RJZBgDIAEoBVIHZ3Vlc3RJZBIYCgdldmVudElkGAQgASgFUgdldmVudElk');
+final $typed_data.Uint8List entryInfoRequestDescriptor = $convert.base64Decode('ChBlbnRyeUluZm9SZXF1ZXN0EhgKB2tleUNvZGUYASABKAlSB2tleUNvZGUSGgoIdXNlcm5hbWUYAiABKAlSCHVzZXJuYW1lEhgKB2V2ZW50SWQYBCABKAVSB2V2ZW50SWQSFAoFdG9rZW4YBSABKAlSBXRva2Vu');
 @$core.Deprecated('Use entryValidationDescriptor instead')
 const entryValidation$json = const {
   '1': 'entryValidation',
@@ -313,15 +338,14 @@ final $typed_data.Uint8List entryValidationDescriptor = $convert.base64Decode('C
 const entryAddUser$json = const {
   '1': 'entryAddUser',
   '2': const [
-    const {'1': 'userId', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+    const {'1': 'username', '3': 1, '4': 1, '5': 9, '10': 'username'},
     const {'1': 'eventId', '3': 2, '4': 1, '5': 5, '10': 'eventId'},
-    const {'1': 'guestId', '3': 3, '4': 1, '5': 5, '10': 'guestId'},
-    const {'1': 'expireDate', '3': 4, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'expireDate'},
+    const {'1': 'guestUsername', '3': 3, '4': 1, '5': 9, '10': 'guestUsername'},
   ],
 };
 
 /// Descriptor for `entryAddUser`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List entryAddUserDescriptor = $convert.base64Decode('CgxlbnRyeUFkZFVzZXISFgoGdXNlcklkGAEgASgFUgZ1c2VySWQSGAoHZXZlbnRJZBgCIAEoBVIHZXZlbnRJZBIYCgdndWVzdElkGAMgASgFUgdndWVzdElkEjoKCmV4cGlyZURhdGUYBCABKAsyGi5nb29nbGUucHJvdG9idWYuVGltZXN0YW1wUgpleHBpcmVEYXRl');
+final $typed_data.Uint8List entryAddUserDescriptor = $convert.base64Decode('CgxlbnRyeUFkZFVzZXISGgoIdXNlcm5hbWUYASABKAlSCHVzZXJuYW1lEhgKB2V2ZW50SWQYAiABKAVSB2V2ZW50SWQSJAoNZ3Vlc3RVc2VybmFtZRgDIAEoCVINZ3Vlc3RVc2VybmFtZQ==');
 @$core.Deprecated('Use entryResponseDescriptor instead')
 const entryResponse$json = const {
   '1': 'entryResponse',
@@ -337,13 +361,14 @@ final $typed_data.Uint8List entryResponseDescriptor = $convert.base64Decode('Cg1
 const entryParam$json = const {
   '1': 'entryParam',
   '2': const [
-    const {'1': 'userId', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+    const {'1': 'username', '3': 1, '4': 1, '5': 9, '10': 'username'},
     const {'1': 'eventId', '3': 2, '4': 1, '5': 5, '10': 'eventId'},
+    const {'1': 'token', '3': 3, '4': 1, '5': 9, '10': 'token'},
   ],
 };
 
 /// Descriptor for `entryParam`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List entryParamDescriptor = $convert.base64Decode('CgplbnRyeVBhcmFtEhYKBnVzZXJJZBgBIAEoBVIGdXNlcklkEhgKB2V2ZW50SWQYAiABKAVSB2V2ZW50SWQ=');
+final $typed_data.Uint8List entryParamDescriptor = $convert.base64Decode('CgplbnRyeVBhcmFtEhoKCHVzZXJuYW1lGAEgASgJUgh1c2VybmFtZRIYCgdldmVudElkGAIgASgFUgdldmVudElkEhQKBXRva2VuGAMgASgJUgV0b2tlbg==');
 @$core.Deprecated('Use entryGuestParamDescriptor instead')
 const entryGuestParam$json = const {
   '1': 'entryGuestParam',
@@ -360,26 +385,26 @@ final $typed_data.Uint8List entryGuestParamDescriptor = $convert.base64Decode('C
 const entryGlobalParam$json = const {
   '1': 'entryGlobalParam',
   '2': const [
-    const {'1': 'userId', '3': 1, '4': 1, '5': 5, '10': 'userId'},
+    const {'1': 'username', '3': 1, '4': 1, '5': 9, '10': 'username'},
     const {'1': 'eventId', '3': 2, '4': 1, '5': 5, '10': 'eventId'},
+    const {'1': 'token', '3': 3, '4': 1, '5': 9, '10': 'token'},
   ],
 };
 
 /// Descriptor for `entryGlobalParam`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List entryGlobalParamDescriptor = $convert.base64Decode('ChBlbnRyeUdsb2JhbFBhcmFtEhYKBnVzZXJJZBgBIAEoBVIGdXNlcklkEhgKB2V2ZW50SWQYAiABKAVSB2V2ZW50SWQ=');
+final $typed_data.Uint8List entryGlobalParamDescriptor = $convert.base64Decode('ChBlbnRyeUdsb2JhbFBhcmFtEhoKCHVzZXJuYW1lGAEgASgJUgh1c2VybmFtZRIYCgdldmVudElkGAIgASgFUgdldmVudElkEhQKBXRva2VuGAMgASgJUgV0b2tlbg==');
 @$core.Deprecated('Use entryInfoDescriptor instead')
 const entryInfo$json = const {
   '1': 'entryInfo',
   '2': const [
     const {'1': 'keyCode', '3': 1, '4': 1, '5': 9, '10': 'keyCode'},
-    const {'1': 'expireDate', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'expireDate'},
     const {'1': 'status', '3': 3, '4': 1, '5': 8, '10': 'status'},
     const {'1': 'statusMsg', '3': 4, '4': 1, '5': 9, '10': 'statusMsg'},
   ],
 };
 
 /// Descriptor for `entryInfo`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List entryInfoDescriptor = $convert.base64Decode('CgllbnRyeUluZm8SGAoHa2V5Q29kZRgBIAEoCVIHa2V5Q29kZRI6CgpleHBpcmVEYXRlGAIgASgLMhouZ29vZ2xlLnByb3RvYnVmLlRpbWVzdGFtcFIKZXhwaXJlRGF0ZRIWCgZzdGF0dXMYAyABKAhSBnN0YXR1cxIcCglzdGF0dXNNc2cYBCABKAlSCXN0YXR1c01zZw==');
+final $typed_data.Uint8List entryInfoDescriptor = $convert.base64Decode('CgllbnRyeUluZm8SGAoHa2V5Q29kZRgBIAEoCVIHa2V5Q29kZRIWCgZzdGF0dXMYAyABKAhSBnN0YXR1cxIcCglzdGF0dXNNc2cYBCABKAlSCXN0YXR1c01zZw==');
 @$core.Deprecated('Use fileUploadRequestDescriptor instead')
 const fileUploadRequest$json = const {
   '1': 'fileUploadRequest',
